@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getVillagerById } from "@/lib/firestore";
+import { getOnchainVillager, formatCap, formatJoinedAt } from "@/lib/village";
 import { getAddressUrl } from "@/lib/utils";
 import MetadataText from "@/components/metadata-text";
 import type { Metadata } from "next";
@@ -46,6 +47,24 @@ function VillagerSkeleton() {
       {/* Metadata skeleton */}
       <div
         style={{
+          width: 100,
+          height: 14,
+          borderRadius: 4,
+          background: "rgba(17, 17, 17, 0.04)",
+          marginBottom: "0.35rem",
+        }}
+      />
+      <div
+        style={{
+          width: 160,
+          height: 14,
+          borderRadius: 4,
+          background: "rgba(17, 17, 17, 0.04)",
+          marginBottom: "0.35rem",
+        }}
+      />
+      <div
+        style={{
           width: 260,
           height: 14,
           borderRadius: 4,
@@ -55,7 +74,7 @@ function VillagerSkeleton() {
       />
       <div
         style={{
-          width: 100,
+          width: 80,
           height: 14,
           borderRadius: 4,
           background: "rgba(17, 17, 17, 0.04)",
@@ -66,7 +85,10 @@ function VillagerSkeleton() {
 }
 
 async function VillagerContent({ userId }: { userId: string }) {
-  const villager = await getVillagerById(userId);
+  const [villager, onchain] = await Promise.all([
+    getVillagerById(userId),
+    getOnchainVillager(Number(userId)),
+  ]);
 
   if (!villager) {
     notFound();
@@ -111,7 +133,10 @@ async function VillagerContent({ userId }: { userId: string }) {
 
       {/* Metadata */}
       <MetadataText as="div">
+        <p>#{villager.id}</p>
+        <p>joined_at:{formatJoinedAt(onchain.joinedAt)}</p>
         <p>
+          address:
           <a
             href={getAddressUrl(villager.walletAddress)}
             target="_blank"
@@ -121,7 +146,7 @@ async function VillagerContent({ userId }: { userId: string }) {
             {villager.walletAddress}
           </a>
         </p>
-        <p>villager : {villager.id}</p>
+        <p>equity:0.0/{formatCap(onchain.cap)}</p>
       </MetadataText>
     </>
   );

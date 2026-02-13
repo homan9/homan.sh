@@ -44,7 +44,7 @@ export default async function HomanVillagerPage() {
           />
         </div>
 
-        {/* Token Name + Address */}
+        {/* Name */}
         <h1
           style={{
             fontSize: "1.125rem",
@@ -57,21 +57,19 @@ export default async function HomanVillagerPage() {
           {token.name}
         </h1>
 
-        <MetadataText as="p">
-          <a
-            href={getAddressUrl(token.personalTokenAddress)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="meta-address"
-          >
-            {token.personalTokenAddress}
-          </a>
-        </MetadataText>
-
         {/* Metadata */}
         <MetadataText as="div" style={{ marginBottom: "1.5rem" }}>
-          <p>legal_name : {token.legalName}</p>
-          <p>outstanding_shares : {token.outstandingShares}</p>
+          <p>#0</p>
+          <p>
+            <a
+              href={getAddressUrl(token.personalTokenAddress)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="meta-address"
+            >
+              {token.personalTokenAddress}
+            </a>
+          </p>
         </MetadataText>
 
         {/* Bio from MDX */}
