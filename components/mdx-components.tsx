@@ -45,7 +45,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
           transform: "translateX(-50%)",
           letterSpacing: "-0.05em",
           color: "#111",
-          marginBottom: "4rem",
+          marginBottom: "3rem",
           lineHeight: 1.1,
           textAlign: "center",
         }}

@@ -1,0 +1,9 @@
+.vis-scene {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    cursor: pointer;
+    user-select: none;
+}

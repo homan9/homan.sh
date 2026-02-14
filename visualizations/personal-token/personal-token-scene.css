@@ -1,0 +1,26 @@
+/* Lines draw from center outward */
+.pt-line {
+    stroke-dasharray: var(--circle-r);
+    stroke-dashoffset: var(--circle-r);
+    animation: pt-draw-line var(--line-draw) ease-out forwards;
+    animation-delay: var(--delay);
+}
+
+@keyframes pt-draw-line {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Person fades in */
+.pt-person-fade {
+    opacity: 0;
+    animation: pt-fade-in var(--person-fade) ease-out forwards;
+    animation-delay: var(--person-delay);
+}
+
+@keyframes pt-fade-in {
+    to {
+        opacity: 1;
+    }
+}
