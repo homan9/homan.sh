@@ -24,10 +24,11 @@ function extractText(node: ReactNode): string {
 }
 
 const marginBottom = "1.2rem";
-const fontSize = "16px";
+const fontSize = 16;
 const fontWeight = 450;
 const letterSpacing = "-0.025em";
 const lineHeight = "1.3rem";
+const color = "rgba(17, 17, 17, 0.93)";
 
 export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
   return {
@@ -37,14 +38,14 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         className="mdx-h1"
         style={{
           scrollMarginTop: "3rem",
-          fontWeight: 580,
+          fontWeight: 620,
           maxWidth: 900,
           width: "90vw",
           marginLeft: "50%",
           transform: "translateX(-50%)",
-          letterSpacing: "-0.065em",
+          letterSpacing: "-0.05em",
           color: "#111",
-          marginBottom: "7rem",
+          marginBottom: "4rem",
           lineHeight: 1.1,
           textAlign: "center",
         }}
@@ -96,7 +97,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
           fontWeight,
           letterSpacing,
           lineHeight,
-          color: "#111",
+          color,
           marginBottom,
         }}
         {...props}
@@ -105,16 +106,48 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       </p>
     ),
     a: ({ href, children, ...props }) => {
+      const isHash = href?.startsWith("#");
       return (
         <a
           href={href ?? "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="link-readmore"
+          {...(!isHash && { target: "_blank", rel: "noopener noreferrer" })}
+          className={isHash ? undefined : "link-readmore"}
           {...props}
         >
           {children}
         </a>
+      );
+    },
+    sup: ({ children, ...props }) => <sup {...props}>{children}</sup>,
+    section: ({ children, className, ...props }) => {
+      if (className?.includes("footnotes")) {
+        return (
+          <section
+            className={className}
+            style={{
+              fontSize: 14,
+              fontWeight: 480,
+              letterSpacing: "-0.03em",
+              lineHeight: "20px",
+              color: "rgba(17, 17, 17, 0.6)",
+            }}
+            {...props}
+          >
+            <style>{`
+              .footnotes > h2 { display: none; }
+              .footnotes ol { padding-left: 1.25rem !important; list-style-type: decimal !important; margin-bottom: 0 !important; }
+              .footnotes li { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.6) !important; margin-bottom: 0.5rem !important; }
+              .footnotes li p { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.6) !important; margin-bottom: 0.25rem !important; }
+              a[id^="user-content-fnref"] { scroll-margin-top: 5rem; }
+            `}</style>
+            {children}
+          </section>
+        );
+      }
+      return (
+        <section className={className} {...props}>
+          {children}
+        </section>
       );
     },
     ul: ({ children, ...props }) => (
@@ -148,7 +181,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
           fontWeight,
           letterSpacing,
           lineHeight,
-          color: "#111",
+          color,
           marginBottom: "0.25rem",
         }}
         {...props}
@@ -162,8 +195,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
           borderLeft: "2px solid rgba(17, 17, 17, 0.15)",
           paddingLeft: "1rem",
           margin: "1rem 0",
-          color: "rgba(17, 17, 17, 0.7)",
-          fontStyle: "italic",
+          color: "rgba(17, 17, 17, 0.4)",
         }}
         {...props}
       >
@@ -174,7 +206,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       <hr
         style={{
           border: "none",
-          borderTop: "1px solid rgba(17, 17, 17, 0.1)",
+          borderTop: "1px solid rgba(17, 17, 17, 0.06)",
           margin: "2rem 0",
         }}
         {...props}
@@ -211,7 +243,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       </pre>
     ),
     strong: ({ children, ...props }) => (
-      <strong style={{ fontWeight: 500 }} {...props}>
+      <strong style={{ fontWeight: 560, color: "#111" }} {...props}>
         {children}
       </strong>
     ),

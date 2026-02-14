@@ -116,9 +116,14 @@ hr {
     border-radius: 3px;
 }
 
+/* ——— Blockquote ——— */
+blockquote p {
+    color: rgba(17, 17, 17, 0.6) !important;
+}
+
 /* ——— MDX H1 ——— */
 .mdx-h1 {
-    font-size: 4.5rem;
+    font-size: 3rem;
 }
 
 @media (max-width: 640px) {
