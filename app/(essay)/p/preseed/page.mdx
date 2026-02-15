@@ -1,7 +1,51 @@
-export const metadata = {
-  title: "preseed"
-}
+import PreseedAgreement from '@/components/preseed-agreement'
+import PreseedInvestors from '@/components/preseed-investors'
 
 # preseed
 
-the preseed round for my token.
+I'm raising a preseed round for my personal token. This is an unpriced round. Your investment converts to newly issued shares at the seed round – my first priced round. All preseed participants receive the same terms.
+
+---
+
+<PreseedInvestors />
+
+## Terms
+
+The round is open to villagers. Total raise is $500,000 USDC. Minimum investment is $25,000, and maximum is $100,000 per villager. Capital flows to me upon investment.
+
+Your investment converts to shares at the seed round. The number of shares you receive is determined by a conversion multiple, which is a function of the seed valuation:
+
+`
+multiple = 1 + 19 × ((seedValuation − 10,000,000) / 90,000,000)²
+`
+
+| Seed Valuation | Multiple |
+|----------------|----------|
+| $10M           | 1.0x     |
+| $30M           | 1.9x    |
+| $50M           | 4.8x    |
+| $70M           | 9.4x    |
+| $90M           | 16.0x   |
+| $100M+         | 20.0x   |
+
+At the floor ($10M seed valuation), your investment converts at 1x – you receive shares worth exactly what you invested. As the seed valuation increases, the multiple grows quadratically, reaching its maximum of 20x at a seed valuation of $100M or above. At 20x, a $25,000 investment converts to $500,000 worth of shares.
+
+$100M is my target for the seed round. [Here's why I believe this is reasonable](/valuation).
+
+I intend the seed round to be a Dutch auction with a floor valuation of $10M.
+
+## Purpose
+
+This round is as much about aligning incentives as it is about capital. A successful seed round benefits us all.
+
+There is no fixed timeline for the seed round. It happens when the village is ready and the conditions are right. The terms are designed to incentivize the right degree of patience. Once we think we can achieve the target valuation for the seed round, there is nothing to gain by delaying it.
+
+## Agreement
+
+<PreseedAgreement />
+
+## Disclosure
+
+My legal name is Karthik Uppuluri. I am a United States citizen. I'm 32 years old (05/18/1993). I have no outstanding legal obligations or debts. As of now, I have no holdings that fall within the scope of my personal token (equity in companies, etc.).
+
+I don't smoke or drink. I eat healthy and generally take good care of my health by modern standards. I had an incident of acute pancreatitis in 2016, but recovered in a few days and haven't had any major health incidents since. I intend to publish a more comprehensive health report leading up to the seed round.

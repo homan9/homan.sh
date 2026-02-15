@@ -11,7 +11,7 @@ type NavbarProps = {
 export default function Navbar({ minimal = false }: NavbarProps) {
   const pathname = usePathname();
   const isLanding = pathname === "/";
-  const isAbout = pathname === "/about";
+  const isAboutPage = pathname === "/about";
 
   return (
     <nav
@@ -50,21 +50,11 @@ export default function Navbar({ minimal = false }: NavbarProps) {
             />
           </Link>
         )}
-        <div className="flex items-center gap-6">
-          {!isAbout && (
-            <Link href="/about" className="nav-link">
-              about
-            </Link>
-          )}
-          <a
-            href="https://github.com/homan9/personal-token"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-link"
-          >
-            source
-          </a>
-        </div>
+        {!isAboutPage && (
+          <Link href="/about" className="nav-link">
+            about
+          </Link>
+        )}
       </div>
     </nav>
   );

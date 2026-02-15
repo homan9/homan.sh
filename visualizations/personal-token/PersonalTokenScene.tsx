@@ -78,7 +78,11 @@ function buildCircleKeyframes(name: string): string {
 
 // ── Component ─────────────────────────────────────────
 
-export default function PersonalTokenScene() {
+type PersonalTokenSceneProps = {
+  fill?: boolean;
+};
+
+export default function PersonalTokenScene({ fill }: PersonalTokenSceneProps) {
   const [mounted, setMounted] = useState(false);
   const [key, setKey] = useState(0);
   const replay = useCallback(() => setKey((k) => k + 1), []);
@@ -88,7 +92,7 @@ export default function PersonalTokenScene() {
     return (
       <div
         className="vis-scene"
-        style={{ aspectRatio: "1 / 1", maxWidth: VIEW }}
+        style={{ aspectRatio: "1 / 1", maxWidth: fill ? undefined : VIEW }}
       />
     );
 
@@ -104,7 +108,7 @@ export default function PersonalTokenScene() {
       onMouseEnter={replay}
       style={
         {
-          maxWidth: VIEW,
+          maxWidth: fill ? undefined : VIEW,
           "--circle-r": CIRCLE_R,
           "--line-draw": `${LINE_DRAW}ms`,
           "--person-fade": `${PERSON_FADE}ms`,

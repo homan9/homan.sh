@@ -91,6 +91,11 @@ a.meta-address:hover {
     background: rgba(17, 17, 17, 0.03);
 }
 
+/* ——— Preseed investor row hover ——— */
+.preseed-investor-row:hover {
+    background: rgba(17, 17, 17, 0.03);
+}
+
 /* ——— General resets ——— */
 a {
     color: inherit;
@@ -134,4 +139,35 @@ blockquote p {
         --invitation-caption-size: 20px;
         --invitation-georgia-size: 21px;
     }
+}
+
+/* ——— About page links ——— */
+.about-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem 0.75rem;
+    margin: 0 -0.75rem;
+    width: calc(100% + 1.5rem);
+    border-radius: 6px;
+    transition: background 0.15s ease;
+    text-decoration: none;
+    color: rgba(17, 17, 17, 0.7);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+}
+
+.about-link:hover {
+    background: rgba(17, 17, 17, 0.04);
+    color: rgba(17, 17, 17, 1);
+}
+
+.about-link-arrow {
+    color: rgba(17, 17, 17, 0.2) !important;
+    transition: color 0.15s ease;
+}
+
+.about-link:hover .about-link-arrow {
+    color: #111;
 }

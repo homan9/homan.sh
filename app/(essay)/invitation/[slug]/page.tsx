@@ -91,7 +91,7 @@ async function InvitationContent({ slug }: { slug: string }) {
         </span>{" "}
         &ndash; a curated group of people who can trade shares of my{" "}
         <a
-          href="/about"
+          href="/my-token"
           target="_blank"
           rel="noopener noreferrer"
           className="link-readmore"

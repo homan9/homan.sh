@@ -107,10 +107,12 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
     ),
     a: ({ href, children, ...props }) => {
       const isHash = href?.startsWith("#");
+      const isInternal = href?.startsWith("/");
+      const isExternal = !isHash && !isInternal;
       return (
         <a
           href={href ?? "#"}
-          {...(!isHash && { target: "_blank", rel: "noopener noreferrer" })}
+          {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
           className={isHash ? undefined : "link-readmore"}
           {...props}
         >
@@ -248,6 +250,91 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       </strong>
     ),
     em: ({ children, ...props }) => <em {...props}>{children}</em>,
+    table: ({ children, ...props }) => (
+      <div
+        style={{
+          overflowX: "auto",
+          marginBottom: "2rem",
+          marginTop: "2rem",
+          borderRadius: 4,
+          background: "rgba(17, 17, 17, 0.015)",
+          border: "1px solid rgba(17, 17, 17, 0.05)",
+        }}
+      >
+        <table
+          style={{
+            width: "100%",
+            fontFamily: `${GeistMono.style.fontFamily}, monospace`,
+            fontSize: 15,
+            fontWeight: 400,
+            letterSpacing: "0",
+            lineHeight: "1.2",
+          }}
+          {...props}
+        >
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children, ...props }) => (
+      <thead
+        style={{
+          borderBottom: "1px solid rgba(17, 17, 17, 0.08)",
+        }}
+        {...props}
+      >
+        {children}
+      </thead>
+    ),
+    th: ({ children, ...props }) => (
+      <th
+        style={{
+          padding: "0.6rem 1rem",
+          textAlign: "left",
+          fontSize: 14,
+          fontWeight: 400,
+          letterSpacing: "0.02em",
+          color: "rgba(17, 17, 17, 0.5)",
+          whiteSpace: "nowrap",
+          borderRight: "1px solid rgba(17, 17, 17, 0.06)",
+        }}
+        {...props}
+      >
+        {children}
+      </th>
+    ),
+    tbody: ({ children, ...props }) => (
+      <tbody {...props}>
+        <style>{`
+          tbody tr:last-child { border-bottom: none !important; }
+          th:last-child, td:last-child { border-right: none !important; }
+        `}</style>
+        {children}
+      </tbody>
+    ),
+    tr: ({ children, ...props }) => (
+      <tr
+        style={{
+          borderBottom: "1px solid rgba(17, 17, 17, 0.04)",
+        }}
+        {...props}
+      >
+        {children}
+      </tr>
+    ),
+    td: ({ children, ...props }) => (
+      <td
+        style={{
+          padding: "0.5rem 1rem",
+          color: "rgba(17, 17, 17, 0.85)",
+          whiteSpace: "nowrap",
+          borderRight: "1px solid rgba(17, 17, 17, 0.06)",
+        }}
+        {...props}
+      >
+        {children}
+      </td>
+    ),
     ...overrides,
   };
 }
