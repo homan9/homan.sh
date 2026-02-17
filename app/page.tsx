@@ -144,7 +144,7 @@ export default function Home() {
         }}
       >
         <MuxVideo
-          playbackId="f7tj2NEwOIyJLtOMybMSD9a01HOuVk3hehCzPBTy000200s"
+          playbackId="ZMuRudvD1mCpVRlcVtuvgMTUY9hDg00977IxmWxLr28Y"
           title="homan"
         />
       </div>

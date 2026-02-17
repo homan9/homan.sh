@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import MuxVideo from "@/components/mux-video";
 import { getVillagerById } from "@/lib/firestore";
 import { getOnchainVillager, formatCap, formatJoinedAt } from "@/lib/village";
 import { getAddressUrl } from "@/lib/utils";
@@ -147,7 +148,17 @@ async function VillagerContent({ userId }: { userId: string }) {
           </a>
         </p>
         <p>equity:0.0/{formatCap(onchain.cap)}</p>
+        {villager.videoID && <p>invitation video:</p>}
       </MetadataText>
+
+      {villager.videoID && (
+        <div style={{ marginTop: "0.75rem" }}>
+          <MuxVideo
+            playbackId={villager.videoID}
+            title={`Invitation video for ${villager.displayName}`}
+          />
+        </div>
+      )}
     </>
   );
 }

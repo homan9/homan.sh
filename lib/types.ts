@@ -5,6 +5,7 @@ export type Villager = {
   walletAddress: string;
   profilePicSrc: string;
   isActive: boolean;
+  videoID: string;
 };
 
 export type Invitation = {

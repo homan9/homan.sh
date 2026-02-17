@@ -19,8 +19,7 @@ const titleStyle: React.CSSProperties = {
   width: "90vw",
   marginLeft: "50%",
   transform: "translateX(-50%)",
-  fontFamily: "sans-serif",
-  letterSpacing: "-0.025em",
+  letterSpacing: "-0.065em",
   color: "#111",
   marginBottom: "3.5rem",
   lineHeight: 1.1,
@@ -46,13 +45,20 @@ const bodyStyle: React.CSSProperties = {
   marginBottom: "1.2rem",
 };
 
-const footerStyle: React.CSSProperties = {
+const hrStyle: React.CSSProperties = {
+  border: "none",
+  borderTop: "1px solid rgba(17, 17, 17, 0.1)",
+  margin: "2rem 0",
+};
+
+const blockquoteStyle: React.CSSProperties = {
   fontSize: "16px",
-  fontWeight: 500,
+  fontWeight: 480,
   letterSpacing: "-0.025em",
-  lineHeight: "1.3rem",
-  color: "rgba(17, 17, 17, 0.4)",
-  marginTop: "1.2rem",
+  lineHeight: "1.4rem",
+  color: "rgba(17, 17, 17, 0.5)",
+  margin: 0,
+  marginBottom: "1rem",
 };
 
 async function InvitationContent({ slug }: { slug: string }) {
@@ -73,10 +79,10 @@ async function InvitationContent({ slug }: { slug: string }) {
       }}
     >
       <h1 className="mdx-h1" style={titleStyle}>
-        hey {invitation.firstName} 👋
+        {invitation.firstName} 👋
       </h1>
 
-      <h2 className="invitation-caption" style={captionStyle}>
+      {/*<h2 className="invitation-caption" style={captionStyle}>
         I&rsquo;m inviting you to join the{" "}
         <span
           className="invitation-georgia"
@@ -88,21 +94,31 @@ async function InvitationContent({ slug }: { slug: string }) {
           }}
         >
           <i>village</i>
-        </span>{" "}
-        &ndash; a curated group of people who can trade shares of my{" "}
-        <a
-          href="/my-token"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="link-readmore"
-        >
-          personal token{" "}
-        </a>
+        </span>
+        .
+      </h2>*/}
+
+      <p style={bodyStyle}>
+        I'm inviting you to join the village – a curated group of people who can
+        trade shares of my{" "}
+        <a href="/my-token" className="link-readmore">
+          personal token
+        </a>{" "}
         freely amongst themselves.
-      </h2>
+      </p>
+
+      {/*<hr style={hrStyle} />*/}
+
+      <p style={blockquoteStyle}>
+        My personal token represents the value I create over my life. Its value
+        is grounded in my actual capital gains from selling equity. It&rsquo;s
+        backed by a legal agreement and represented onchain.
+      </p>
+
+      <hr style={hrStyle} />
 
       {invitation.videoID && (
-        <div style={{ marginTop: "1.2rem" }}>
+        <div>
           <MuxVideo
             playbackId={invitation.videoID}
             title={`Invitation for ${invitation.firstName}`}
@@ -110,15 +126,11 @@ async function InvitationContent({ slug }: { slug: string }) {
         </div>
       )}
 
-      <p style={footerStyle}>
+      <hr style={hrStyle} />
+      <p style={blockquoteStyle}>
         There is no obligation to buy or trade shares of my token. By joining
         the village, you simply give yourself the option to.
       </p>
-
-      {/*<p style={{ ...footerStyle, marginTop: "1.2rem" }}>
-        note: joining my village isn&rsquo;t an obligation to buy or trade
-        shares of my token.
-      </p>*/}
     </div>
   );
 }
