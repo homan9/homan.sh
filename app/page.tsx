@@ -4,10 +4,12 @@ import { Suspense } from "react";
 import { GeistMono } from "geist/font/mono";
 import MuxVideo from "@/components/mux-video";
 import FloatingPill from "@/components/floating-pill";
+import OnchainView from "@/components/onchain-view";
 import VillagerList from "@/components/villager-list";
 import { getInvitations } from "@/lib/firestore";
 import type { Metadata } from "next";
 
+const VILLAGE_ADDRESS = "0xA2C7d149fD50A277313F2349A558fdD59FCC6bCA";
 const avatarSize = 36;
 
 export const metadata: Metadata = {
@@ -18,7 +20,7 @@ const rowStyle: React.CSSProperties = {
   display: "flex",
   alignItems: "center",
   gap: "0.75rem",
-  padding: "0.3rem 1.5rem",
+  padding: "0.5rem 1.5rem",
   margin: "0 -1.5rem",
   width: "calc(100% + 3rem)",
   borderRadius: 6,
@@ -169,20 +171,17 @@ export default function Home() {
           padding: "0 1.5rem 6rem",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          {/* Villagers */}
-          <div>
-            <Suspense fallback={<ListPlaceholder />}>
-              <VillagerList />
-            </Suspense>
-          </div>
+        <OnchainView contractAddress={VILLAGE_ADDRESS}>
+          <Suspense fallback={<ListPlaceholder />}>
+            <VillagerList />
+          </Suspense>
+        </OnchainView>
 
-          {/* Invitations */}
-          <div>
-            <Suspense fallback={<ListPlaceholder />}>
-              <Invitations />
-            </Suspense>
-          </div>
+        {/* Invitations (not yet in the village) */}
+        <div style={{ marginTop: "1rem", padding: "0 1.5rem" }}>
+          <Suspense fallback={<ListPlaceholder />}>
+            <Invitations />
+          </Suspense>
         </div>
       </div>
     </div>
