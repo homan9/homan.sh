@@ -31,7 +31,8 @@ export default function OnchainView({
           marginTop: "1rem",
           paddingTop: "0.75rem",
           borderTopWidth: "var(--dashed-border-width)",
-          borderTopStyle: "var(--dashed-border-style)",
+          borderTopStyle:
+            "var(--dashed-border-style)" as React.CSSProperties["borderTopStyle"],
           borderTopColor: "var(--dashed-border-color)",
         }}
       >
