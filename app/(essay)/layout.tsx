@@ -9,19 +9,20 @@ export default function EssayLayout({
     <div
       style={{
         display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         minHeight: "100vh",
-        justifyContent: "center",
         background: "#fff",
       }}
     >
       <div
+        className="page-container"
         style={{
           width: "100%",
-          maxWidth: 598,
-          padding: "9rem 1.5rem 6rem",
+          maxWidth: 550,
         }}
       >
-        <article>{children}</article>
+        <article className="essay-article">{children}</article>
       </div>
     </div>
   );

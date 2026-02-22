@@ -4,9 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
+const CONSTRAINED_ROUTES = ["/", "/about"];
+
 export default function Navbar() {
   const pathname = usePathname();
   const isAboutPage = pathname === "/about";
+  const isConstrained = CONSTRAINED_ROUTES.includes(pathname);
 
   return (
     <nav
@@ -23,10 +26,10 @@ export default function Navbar() {
       }}
     >
       <div
-        className="page-container"
+        className={isConstrained ? "page-container" : undefined}
         style={{
           width: "100%",
-          maxWidth: 500,
+          maxWidth: isConstrained ? 500 : undefined,
           padding: "16px 24px",
           display: "flex",
           alignItems: "center",

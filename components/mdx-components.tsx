@@ -24,11 +24,11 @@ function extractText(node: ReactNode): string {
   return "";
 }
 
-const marginBottom = "1.2rem";
-const fontSize = 16;
-const fontWeight = 450;
-const letterSpacing = "-0.025em";
-const lineHeight = "1.3rem";
+const marginBottom = "1.1rem";
+const fontSize = "0.9rem";
+const fontWeight = 460;
+const letterSpacing = "-0.01em";
+const lineHeight = "1.21rem";
 const color = "rgba(17, 17, 17, 0.93)";
 
 export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
@@ -39,16 +39,13 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         className="mdx-h1"
         style={{
           scrollMarginTop: "3rem",
-          fontWeight: 620,
-          maxWidth: 900,
-          width: "90vw",
-          marginLeft: "50%",
-          transform: "translateX(-50%)",
-          letterSpacing: "-0.05em",
+          fontSize: "1.25rem",
+          fontWeight: 540,
+          // letterSpacing: "-0.04em",
           color: "#111",
-          marginBottom: "3rem",
-          lineHeight: 1.1,
-          textAlign: "center",
+          marginBottom: "2rem",
+          lineHeight: 1.2,
+          textAlign: "left",
         }}
         {...props}
       >
@@ -56,29 +53,49 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       </h1>
     ),
     h2: ({ children, ...props }) => (
-      <h2
-        id={slugify(children)}
+      <div
+        className="mdx-h2-wrapper"
         style={{
-          scrollMarginTop: "3rem",
-          fontSize: 18,
-          fontWeight: 540,
-          letterSpacing: "-0.04em",
-          color: "rgba(17, 17, 17)",
-          marginTop: "3rem",
+          display: "flex",
+          alignItems: "baseline",
+          gap: 12,
+          marginTop: "4rem",
           marginBottom,
-          lineHeight: 1.2,
         }}
-        {...props}
       >
-        {children}
-      </h2>
+        <h2
+          id={slugify(children)}
+          style={{
+            scrollMarginTop: "3rem",
+            fontSize,
+            fontWeight: 540,
+            letterSpacing: "-0.03em",
+            color: "#111",
+            lineHeight: 1.3,
+            flexShrink: 0,
+          }}
+          {...props}
+        >
+          {children}
+        </h2>
+        <span
+          style={{
+            flex: 1,
+            borderBottomWidth: "var(--dashed-border-width)",
+            borderBottomStyle: "dashed",
+            borderBottomColor: "var(--dashed-border-color)",
+            alignSelf: "center",
+            minWidth: 12,
+          }}
+        />
+      </div>
     ),
     h3: ({ children, ...props }) => (
       <h3
         id={slugify(children)}
         style={{
           scrollMarginTop: "3rem",
-          fontSize: "1rem",
+          fontSize,
           fontWeight: 580,
           letterSpacing: "-0.03em",
           color: "#111",
@@ -138,6 +155,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
           >
             <style>{`
               .footnotes > h2 { display: none; }
+              .footnotes > .mdx-h2-wrapper { display: none !important; }
               .footnotes ol { padding-left: 1.25rem !important; list-style-type: decimal !important; margin-bottom: 0 !important; }
               .footnotes li { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.6) !important; margin-bottom: 0.5rem !important; }
               .footnotes li p { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.6) !important; margin-bottom: 0.25rem !important; }
@@ -209,7 +227,9 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       <hr
         style={{
           border: "none",
-          borderTop: "1px solid rgba(17, 17, 17, 0.06)",
+          borderTopWidth: "var(--dashed-border-width)",
+          borderTopStyle: "dashed",
+          borderTopColor: "var(--dashed-border-color)",
           margin: "2rem 0",
         }}
         {...props}
