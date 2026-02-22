@@ -30,7 +30,7 @@ export default function SectionHeader({ title, caption }: SectionHeaderProps) {
             letterSpacing: "-0.02em",
             lineHeight: 1.5,
             margin: 0,
-            marginTop: 0,
+            marginTop: 4,
           }}
         >
           {caption}
