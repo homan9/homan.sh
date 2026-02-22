@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import MuxVideo from "@/components/mux-video";
+import { GeistMono } from "geist/font/mono";
 import { getVillagerById } from "@/lib/firestore";
 import { getOnchainVillager, formatCap, formatJoinedAt } from "@/lib/village";
 import { getAddressUrl } from "@/lib/utils";
-import MetadataText from "@/components/metadata-text";
+import SubMenu, { type SubMenuRow } from "@/components/ui/sub-menu";
 import type { Metadata } from "next";
 
 type Params = Promise<{ user_id: string }>;
@@ -19,69 +19,85 @@ export async function generateMetadata({
   return { title: `villager #${user_id}` };
 }
 
+const avatarSize = 36;
+
 function VillagerSkeleton() {
   return (
-    <>
-      {/* Profile Pic skeleton */}
-      <div style={{ marginBottom: "1.5rem" }}>
+    <div>
+      {/* Header skeleton */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+          padding: "12px 24px",
+          borderBottomWidth: "var(--dashed-border-width)",
+          borderBottomStyle: "dashed",
+          borderBottomColor: "var(--dashed-border-color)",
+        }}
+      >
         <div
           style={{
-            width: 96,
-            height: 96,
-            borderRadius: "8px",
+            width: avatarSize,
+            height: avatarSize,
+            borderRadius: "50%",
+            background: "rgba(17, 17, 17, 0.04)",
+            flexShrink: 0,
+          }}
+        />
+        <div
+          style={{
+            width: 120,
+            height: 16,
+            borderRadius: 4,
             background: "rgba(17, 17, 17, 0.04)",
           }}
         />
       </div>
 
-      {/* Name skeleton */}
-      <div
-        style={{
-          width: 120,
-          height: 20,
-          borderRadius: 4,
-          background: "rgba(17, 17, 17, 0.04)",
-          marginBottom: "0.5rem",
-        }}
-      />
-
-      {/* Metadata skeleton */}
-      <div
-        style={{
-          width: 100,
-          height: 14,
-          borderRadius: 4,
-          background: "rgba(17, 17, 17, 0.04)",
-          marginBottom: "0.35rem",
-        }}
-      />
-      <div
-        style={{
-          width: 160,
-          height: 14,
-          borderRadius: 4,
-          background: "rgba(17, 17, 17, 0.04)",
-          marginBottom: "0.35rem",
-        }}
-      />
-      <div
-        style={{
-          width: 260,
-          height: 14,
-          borderRadius: 4,
-          background: "rgba(17, 17, 17, 0.04)",
-          marginBottom: "0.35rem",
-        }}
-      />
-      <div
-        style={{
-          width: 80,
-          height: 14,
-          borderRadius: 4,
-          background: "rgba(17, 17, 17, 0.04)",
-        }}
-      />
-    </>
+      {/* Row skeletons */}
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.75rem",
+            padding: "12px 24px",
+            borderBottomWidth: "var(--dashed-border-width)",
+            borderBottomStyle: "dashed",
+            borderBottomColor: "var(--dashed-border-color)",
+          }}
+        >
+          <div
+            style={{
+              width: 70 + i * 10,
+              height: 14,
+              borderRadius: 4,
+              background: "rgba(17, 17, 17, 0.04)",
+            }}
+          />
+          <span
+            style={{
+              flex: 1,
+              borderBottomWidth: "var(--dashed-border-width)",
+              borderBottomStyle: "dashed",
+              borderBottomColor: "var(--dashed-border-color)",
+              alignSelf: "center",
+              minWidth: 20,
+            }}
+          />
+          <div
+            style={{
+              width: 60 + i * 15,
+              height: 14,
+              borderRadius: 4,
+              background: "rgba(17, 17, 17, 0.04)",
+            }}
+          />
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -95,71 +111,98 @@ async function VillagerContent({ userId }: { userId: string }) {
     notFound();
   }
 
+  const rows: SubMenuRow[] = [
+    {
+      label: "",
+      value: villager.walletAddress,
+      type: "solo-link",
+      href: getAddressUrl(villager.walletAddress),
+    },
+    { label: "Villager", value: `#${villager.id}` },
+    { label: "Cap", value: formatCap(onchain.cap) },
+    { label: "Joined on", value: formatJoinedAt(onchain.joinedAt) },
+  ];
+
+  if (villager.videoID) {
+    rows.push({
+      label: `${villager.displayName} <> homan`,
+      value: villager.videoID,
+      type: "video",
+    });
+  }
+
   return (
-    <>
-      {/* Profile Pic */}
-      <div style={{ marginBottom: "1.5rem" }}>
+    <div>
+      {/* Header row: avatar + name + equity */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+          padding: "12px 24px",
+        }}
+      >
         {villager.profilePicSrc ? (
           <Image
             src={villager.profilePicSrc}
             alt={villager.displayName}
-            width={96}
-            height={96}
-            style={{ borderRadius: "8px", objectFit: "cover" }}
+            width={avatarSize}
+            height={avatarSize}
+            style={{ borderRadius: "50%", flexShrink: 0 }}
           />
         ) : (
           <div
             style={{
-              width: 96,
-              height: 96,
-              borderRadius: "8px",
+              width: avatarSize,
+              height: avatarSize,
+              borderRadius: "50%",
               background: "#e4e4e7",
+              flexShrink: 0,
             }}
           />
         )}
+
+        <span
+          style={{
+            fontSize: 16,
+            fontWeight: 500,
+            letterSpacing: "-0.03em",
+            color: "#111",
+            flexShrink: 0,
+          }}
+        >
+          {villager.displayName}
+        </span>
+
+        {/* Dashed separator */}
+        <span
+          style={{
+            flex: 1,
+            borderBottomWidth: "var(--dashed-border-width)",
+            borderBottomStyle: "dashed",
+            borderBottomColor: "var(--dashed-border-color)",
+            alignSelf: "center",
+            minWidth: 20,
+          }}
+        />
+
+        <span
+          className={GeistMono.className}
+          style={{
+            fontSize: "1rem",
+            fontWeight: 440,
+            color: "#111",
+            letterSpacing: "0",
+            flexShrink: 0,
+          }}
+        >
+          0%
+        </span>
       </div>
 
-      {/* Name */}
-      <h1
-        style={{
-          fontSize: "1.125rem",
-          fontWeight: 460,
-          letterSpacing: "-0.03em",
-          color: "#111",
-          marginBottom: "0.25rem",
-        }}
-      >
-        {villager.displayName}
-      </h1>
-
-      {/* Metadata */}
-      <MetadataText as="div">
-        <p>#{villager.id}</p>
-        <p>joined_at:{formatJoinedAt(onchain.joinedAt)}</p>
-        <p>
-          address:
-          <a
-            href={getAddressUrl(villager.walletAddress)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="meta-address"
-          >
-            {villager.walletAddress}
-          </a>
-        </p>
-        <p>equity:0.0/{formatCap(onchain.cap)}</p>
-        {villager.videoID && <p>invitation video:</p>}
-      </MetadataText>
-
-      {villager.videoID && (
-        <div style={{ marginTop: "0.75rem" }}>
-          <MuxVideo
-            playbackId={villager.videoID}
-            title={`Invitation video for ${villager.displayName}`}
-          />
-        </div>
-      )}
-    </>
+      {/* Detail rows */}
+      <SubMenu rows={rows} />
+    </div>
   );
 }
 
@@ -170,16 +213,16 @@ export default async function VillagerPage({ params }: { params: Params }) {
     <div
       style={{
         display: "flex",
-        minHeight: "100vh",
-        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
         background: "#fff",
       }}
     >
       <div
+        className="page-container"
         style={{
           width: "100%",
-          maxWidth: 550,
-          padding: "9rem 1.5rem 6rem",
+          maxWidth: 500,
         }}
       >
         <Suspense fallback={<VillagerSkeleton />}>
