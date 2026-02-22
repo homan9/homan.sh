@@ -7,6 +7,11 @@
     --background: #ffffff;
     --invitation-caption-size: 24px;
     --invitation-georgia-size: 25px;
+
+    /* ——— Design system: dashed border ——— */
+    --dashed-border-color: rgba(17, 17, 17, 0.06);
+    --dashed-border-width: 1px;
+    --dashed-border-style: dashed;
 }
 
 @theme inline {
@@ -32,6 +37,59 @@ body {
     font-weight: 420;
     line-height: 1.6;
     letter-spacing: -0.03em;
+}
+
+/* ——— Navbar: dashed border-bottom ——— */
+.navbar {
+    border-bottom-width: var(--dashed-border-width);
+    border-bottom-style: var(--dashed-border-style);
+    border-bottom-color: var(--dashed-border-color);
+}
+
+/* ——— Page container with dashed side borders ——— */
+.page-container {
+    border-left-width: var(--dashed-border-width);
+    border-left-style: var(--dashed-border-style);
+    border-left-color: var(--dashed-border-color);
+    border-right-width: var(--dashed-border-width);
+    border-right-style: var(--dashed-border-style);
+    border-right-color: var(--dashed-border-color);
+}
+
+/* ——— Section: no border-top; divider lives on last list item ——— */
+
+/* ——— List group: dim-on-hover mechanic ———
+   When any item in the list is hovered, all siblings dim
+   and only the hovered item stays fully visible.
+   This creates a "spotlight" effect. */
+.list-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-group-item,
+.list-group-passive {
+    border-top-width: var(--dashed-border-width);
+    border-top-style: var(--dashed-border-style);
+    border-top-color: var(--dashed-border-color);
+}
+
+.list-group > :last-child {
+    border-bottom: var(--dashed-border-width) var(--dashed-border-style)
+        var(--dashed-border-color) !important;
+}
+
+.list-group-item {
+    transition: opacity 0.2s ease;
+}
+
+.list-group:has(.list-group-item:hover) .list-group-item {
+    opacity: 0.35;
+}
+
+.list-group:has(.list-group-item:hover) .list-group-item:hover {
+    opacity: 1;
 }
 
 /* ——— Metadata address links ——— */
@@ -61,7 +119,7 @@ a.meta-address:hover {
 .nav-link {
     font-size: 1rem;
     font-weight: 500;
-    color: rgba(17, 17, 17, 0.4);
+    color: rgba(17, 17, 17, 0.37);
     text-decoration: none;
     transition: color 0.15s ease;
 }
@@ -86,16 +144,6 @@ a.meta-address:hover {
     text-decoration-color: #0066cc;
 }
 
-/* ——— Villager row hover ——— */
-.villager-row:hover {
-    background: rgba(17, 17, 17, 0.03);
-}
-
-/* ——— Preseed investor row hover ——— */
-.preseed-investor-row:hover {
-    background: rgba(17, 17, 17, 0.03);
-}
-
 /* ——— General resets ——— */
 a {
     color: inherit;
@@ -104,7 +152,9 @@ a {
 
 hr {
     border: none;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-top-width: var(--dashed-border-width);
+    border-top-style: var(--dashed-border-style);
+    border-top-color: var(--dashed-border-color);
 }
 
 /* ——— Scrollbar ——— */
@@ -126,14 +176,60 @@ blockquote p {
     color: rgba(17, 17, 17, 0.6) !important;
 }
 
+/* ——— Table of Contents (desktop sidebar) ——— */
+.toc {
+    position: fixed;
+    right: calc(50% + 275px + 48px);
+    width: 180px;
+    z-index: 40;
+}
+
+.toc-item {
+    color: rgba(17, 17, 17, 0.32);
+}
+
+.toc-item:hover {
+    color: rgba(17, 17, 17, 1);
+}
+
+.toc-item[data-active="true"] {
+    color: #111;
+    font-weight: 500 !important;
+}
+
+@media (max-width: 1100px) {
+    .toc {
+        display: none;
+    }
+}
+
+/* ——— Essay article padding ——— */
+.essay-article {
+    padding: 48px 48px 96px;
+}
+
+.essay-article .mdx-h2-wrapper {
+    margin-right: -48px !important;
+    scroll-margin-top: 5rem;
+}
+
+@media (max-width: 640px) {
+    .essay-article {
+        padding: 48px 24px 96px;
+    }
+    .essay-article .mdx-h2-wrapper {
+        margin-right: -24px !important;
+    }
+}
+
 /* ——— MDX H1 ——— */
 .mdx-h1 {
-    font-size: 3rem;
+    font-size: 1.5rem;
 }
 
 @media (max-width: 640px) {
     .mdx-h1 {
-        font-size: 2.25rem;
+        font-size: 1.5rem;
     }
     :root {
         --invitation-caption-size: 20px;

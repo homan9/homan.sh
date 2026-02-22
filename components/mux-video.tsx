@@ -9,16 +9,23 @@ type MuxVideoProps = {
 
 export default function MuxVideo({ playbackId, title }: MuxVideoProps) {
   return (
-    <MuxPlayer
-      playbackId={playbackId}
-      metadata={{ video_title: title }}
-      accentColor="#111111"
+    <div
       style={{
         width: "100%",
         aspectRatio: "16 / 9",
-        borderRadius: 6,
         overflow: "hidden",
+        background: "#000",
       }}
-    />
+    >
+      <MuxPlayer
+        playbackId={playbackId}
+        metadata={{ video_title: title }}
+        accentColor="#111111"
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+      />
+    </div>
   );
 }

@@ -1,62 +1,52 @@
 import Image from "next/image";
-import Link from "next/link";
 import { getInvitations } from "@/lib/firestore";
+import List from "@/components/ui/list";
+import BaseListItem from "@/components/ui/list-item";
+
+const avatarSize = 36;
 
 export default async function InvitationList() {
   const invitations = await getInvitations();
 
   return (
-    <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+    <List>
       {invitations.map((invitation) => (
-        <li key={invitation.id}>
-          <Link
-            href={`/invitation/${invitation.id}`}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.75rem",
-              padding: "0.5rem 1.25rem",
-              margin: "0 -1.25rem",
-              width: "calc(100% + 2.5rem)",
-              borderRadius: 6,
-              transition: "background 0.15s ease",
-              textDecoration: "none",
-              color: "inherit",
-              opacity: 0.5,
-            }}
-            className="villager-row"
-          >
-            {invitation.profilePicSrc ? (
-              <Image
-                src={invitation.profilePicSrc}
-                alt={invitation.displayName}
-                width={32}
-                height={32}
-                style={{ borderRadius: "50%", filter: "grayscale(1)" }}
-              />
-            ) : (
-              <div
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "50%",
-                  background: "#e4e4e7",
-                }}
-              />
-            )}
-            <span
+        <BaseListItem key={invitation.id} href={`/invitation/${invitation.id}`}>
+          {invitation.profilePicSrc ? (
+            <Image
+              src={invitation.profilePicSrc}
+              alt={invitation.displayName}
+              width={avatarSize}
+              height={avatarSize}
               style={{
-                fontSize: "1.125rem",
-                fontWeight: 460,
-                letterSpacing: "-0.03em",
-                color: "#111",
+                borderRadius: "50%",
+                filter: "grayscale(1) contrast(1.1)",
+                flexShrink: 0,
               }}
-            >
-              {invitation.displayName}
-            </span>
-          </Link>
-        </li>
+            />
+          ) : (
+            <div
+              style={{
+                width: avatarSize,
+                height: avatarSize,
+                borderRadius: "50%",
+                background: "#e4e4e7",
+                flexShrink: 0,
+              }}
+            />
+          )}
+          <span
+            style={{
+              fontSize: 16,
+              fontWeight: 500,
+              letterSpacing: "-0.03em",
+              color: "#111",
+            }}
+          >
+            {invitation.displayName}
+          </span>
+        </BaseListItem>
       ))}
-    </ul>
+    </List>
   );
 }

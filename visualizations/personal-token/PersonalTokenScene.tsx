@@ -139,6 +139,7 @@ export default function PersonalTokenScene({ fill }: PersonalTokenSceneProps) {
           fill="none"
           stroke={STROKE_COLOR}
           strokeWidth={1}
+          strokeDasharray="4 3"
           style={{
             opacity: 0,
             animation: `${squareName} ${ANIM_DURATION}ms linear forwards`,

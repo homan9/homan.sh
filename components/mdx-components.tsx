@@ -24,11 +24,11 @@ function extractText(node: ReactNode): string {
   return "";
 }
 
-const marginBottom = "1.2rem";
-const fontSize = 16;
-const fontWeight = 450;
-const letterSpacing = "-0.025em";
-const lineHeight = "1.3rem";
+const marginBottom = "1.1rem";
+const fontSize = "0.9rem";
+const fontWeight = 460;
+const letterSpacing = "-0.01em";
+const lineHeight = "1.21rem";
 const color = "rgba(17, 17, 17, 0.93)";
 
 export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
@@ -39,16 +39,13 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         className="mdx-h1"
         style={{
           scrollMarginTop: "3rem",
-          fontWeight: 620,
-          maxWidth: 900,
-          width: "90vw",
-          marginLeft: "50%",
-          transform: "translateX(-50%)",
-          letterSpacing: "-0.05em",
-          color: "#111",
-          marginBottom: "3rem",
-          lineHeight: 1.1,
-          textAlign: "center",
+          fontSize,
+          fontWeight: 580,
+          letterSpacing: "-0.02em",
+          color: "rgba(17, 17, 17, 1.0)",
+          marginBottom: "1.1rem",
+          lineHeight: 1.2,
+          textAlign: "left",
         }}
         {...props}
       >
@@ -56,29 +53,49 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       </h1>
     ),
     h2: ({ children, ...props }) => (
-      <h2
-        id={slugify(children)}
+      <div
+        className="mdx-h2-wrapper"
         style={{
-          scrollMarginTop: "3rem",
-          fontSize: 18,
-          fontWeight: 540,
-          letterSpacing: "-0.04em",
-          color: "rgba(17, 17, 17)",
-          marginTop: "3rem",
+          display: "flex",
+          alignItems: "baseline",
+          gap: 12,
+          marginTop: "4rem",
           marginBottom,
-          lineHeight: 1.2,
         }}
-        {...props}
       >
-        {children}
-      </h2>
+        <h2
+          id={slugify(children)}
+          style={{
+            scrollMarginTop: "3rem",
+            fontSize,
+            fontWeight: 540,
+            letterSpacing: "-0.03em",
+            color: "#111",
+            lineHeight: 1.3,
+            flexShrink: 0,
+          }}
+          {...props}
+        >
+          {children}
+        </h2>
+        <span
+          style={{
+            flex: 1,
+            borderBottomWidth: "var(--dashed-border-width)",
+            borderBottomStyle: "dashed",
+            borderBottomColor: "var(--dashed-border-color)",
+            alignSelf: "center",
+            minWidth: 12,
+          }}
+        />
+      </div>
     ),
     h3: ({ children, ...props }) => (
       <h3
         id={slugify(children)}
         style={{
           scrollMarginTop: "3rem",
-          fontSize: "1rem",
+          fontSize,
           fontWeight: 580,
           letterSpacing: "-0.03em",
           color: "#111",
@@ -138,9 +155,10 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
           >
             <style>{`
               .footnotes > h2 { display: none; }
+              .footnotes > .mdx-h2-wrapper { display: none !important; }
               .footnotes ol { padding-left: 1.25rem !important; list-style-type: decimal !important; margin-bottom: 0 !important; }
-              .footnotes li { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.6) !important; margin-bottom: 0.5rem !important; }
-              .footnotes li p { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.6) !important; margin-bottom: 0.25rem !important; }
+              .footnotes li { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.4) !important; margin-bottom: 0.5rem !important; }
+              .footnotes li p { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.4) !important; margin-bottom: 0.25rem !important; }
               a[id^="user-content-fnref"] { scroll-margin-top: 5rem; }
             `}</style>
             {children}
@@ -209,7 +227,9 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       <hr
         style={{
           border: "none",
-          borderTop: "1px solid rgba(17, 17, 17, 0.06)",
+          borderTopWidth: "var(--dashed-border-width)",
+          borderTopStyle: "dashed",
+          borderTopColor: "var(--dashed-border-color)",
           margin: "2rem 0",
         }}
         {...props}
@@ -261,7 +281,14 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         {children}
       </strong>
     ),
-    em: ({ children, ...props }) => <em {...props}>{children}</em>,
+    em: ({ children, ...props }) => (
+      <em
+        style={{ fontWeight: 520, color: "rgba(17, 17, 17, 0.5)" }}
+        {...props}
+      >
+        {children}
+      </em>
+    ),
     table: ({ children, ...props }) => (
       <div
         style={{
@@ -277,7 +304,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
           style={{
             width: "100%",
             fontFamily: `${GeistMono.style.fontFamily}, monospace`,
-            fontSize: 15,
+            fontSize,
             fontWeight: 400,
             letterSpacing: "0",
             lineHeight: "1.2",
@@ -346,6 +373,20 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       >
         {children}
       </td>
+    ),
+    Caption: ({ children }) => (
+      <p
+        style={{
+          fontSize,
+          fontWeight: 480,
+          letterSpacing,
+          lineHeight,
+          color: "rgba(17, 17, 17, 0.37)",
+          marginBottom,
+        }}
+      >
+        {children}
+      </p>
     ),
     ...overrides,
   };

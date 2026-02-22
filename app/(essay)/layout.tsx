@@ -1,4 +1,5 @@
 import React from "react";
+import TableOfContents from "@/components/ui/table-of-contents";
 
 export default function EssayLayout({
   children,
@@ -9,19 +10,20 @@ export default function EssayLayout({
     <div
       style={{
         display: "flex",
-        minHeight: "100vh",
-        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
         background: "#fff",
       }}
     >
+      <TableOfContents />
       <div
+        className="page-container"
         style={{
           width: "100%",
-          maxWidth: 598,
-          padding: "9rem 1.5rem 6rem",
+          maxWidth: 600,
         }}
       >
-        <article>{children}</article>
+        <article className="essay-article">{children}</article>
       </div>
     </div>
   );

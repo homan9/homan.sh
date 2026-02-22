@@ -17,8 +17,10 @@ export default function OnchainView({
   return (
     <div
       style={{
-        border: "1px solid rgba(17, 17, 17, 0.08)",
-        borderRadius: 8,
+        borderWidth: "var(--dashed-border-width)",
+        borderStyle: "var(--dashed-border-style)",
+        borderColor: "var(--dashed-border-color)",
+        borderRadius: 0,
         padding: "1.25rem 1.5rem",
         marginBottom: "1.2rem",
       }}
@@ -28,7 +30,9 @@ export default function OnchainView({
         style={{
           marginTop: "1rem",
           paddingTop: "0.75rem",
-          borderTop: "1px solid rgba(17, 17, 17, 0.05)",
+          borderTopWidth: "var(--dashed-border-width)",
+          borderTopStyle: "var(--dashed-border-style)",
+          borderTopColor: "var(--dashed-border-color)",
         }}
       >
         <a
