@@ -34,7 +34,7 @@ export default function BaseListItem({
         display: "flex",
         alignItems: "center",
         gap: "0.75rem",
-        padding: "10px 24px",
+        padding: "12px 24px",
         ...style,
       }}
     >

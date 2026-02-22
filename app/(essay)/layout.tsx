@@ -1,4 +1,5 @@
 import React from "react";
+import TableOfContents from "@/components/ui/table-of-contents";
 
 export default function EssayLayout({
   children,
@@ -15,6 +16,7 @@ export default function EssayLayout({
         background: "#fff",
       }}
     >
+      <TableOfContents />
       <div
         className="page-container"
         style={{
