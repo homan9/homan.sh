@@ -10,8 +10,7 @@ export default function Section({ children, style }: SectionProps) {
     <section
       className="section"
       style={{
-        paddingTop: 48,
-        paddingBottom: 48,
+        paddingTop: 64,
         ...style,
       }}
     >

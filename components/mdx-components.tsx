@@ -39,10 +39,10 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         className="mdx-h1"
         style={{
           scrollMarginTop: "3rem",
-          fontSize: "1.25rem",
-          fontWeight: 540,
-          // letterSpacing: "-0.04em",
-          color: "#111",
+          fontSize: 18,
+          fontWeight: 500,
+          letterSpacing: "-0.02em",
+          color: "rgba(17, 17, 17, 1.0)",
           marginBottom: "2rem",
           lineHeight: 1.2,
           textAlign: "left",
@@ -157,8 +157,8 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
               .footnotes > h2 { display: none; }
               .footnotes > .mdx-h2-wrapper { display: none !important; }
               .footnotes ol { padding-left: 1.25rem !important; list-style-type: decimal !important; margin-bottom: 0 !important; }
-              .footnotes li { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.6) !important; margin-bottom: 0.5rem !important; }
-              .footnotes li p { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.6) !important; margin-bottom: 0.25rem !important; }
+              .footnotes li { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.4) !important; margin-bottom: 0.5rem !important; }
+              .footnotes li p { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.4) !important; margin-bottom: 0.25rem !important; }
               a[id^="user-content-fnref"] { scroll-margin-top: 5rem; }
             `}</style>
             {children}

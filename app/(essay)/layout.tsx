@@ -21,7 +21,7 @@ export default function EssayLayout({
         className="page-container"
         style={{
           width: "100%",
-          maxWidth: 550,
+          maxWidth: 600,
         }}
       >
         <article className="essay-article">{children}</article>

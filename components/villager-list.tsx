@@ -26,18 +26,32 @@ export default async function VillagerList() {
             fontWeight: 500,
             color: "#111",
             letterSpacing: "-0.02em",
+            flexShrink: 0,
           }}
         >
           Outstanding shares
         </span>
+
+        {/* Dashed separator within the row */}
+        <span
+          style={{
+            flex: 1,
+            borderBottomWidth: "var(--dashed-border-width)",
+            borderBottomStyle: "dashed",
+            borderBottomColor: "var(--dashed-border-color)",
+            alignSelf: "center",
+            minWidth: 20,
+          }}
+        />
+
         <span
           className={GeistMono.className}
           style={{
             fontSize: "1rem",
             fontWeight: 440,
             color: "#111",
-            marginLeft: "auto",
             letterSpacing: "0",
+            flexShrink: 0,
           }}
         >
           0

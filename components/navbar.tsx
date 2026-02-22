@@ -4,11 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const CONSTRAINED_ROUTES = ["/", "/about"];
+const CONSTRAINED_ROUTES = ["/", "/index"];
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isAboutPage = pathname === "/about";
+  const isAboutPage = pathname === "/index";
   const isConstrained = CONSTRAINED_ROUTES.includes(pathname);
 
   return (
@@ -18,7 +18,7 @@ export default function Navbar() {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "rgba(255, 255, 255, 0.7)",
+        background: "rgba(255, 255, 255, 0.5)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         display: "flex",
@@ -52,16 +52,16 @@ export default function Navbar() {
 
         {!isAboutPage && (
           <Link
-            href="/about"
+            href="/index"
             style={{
-              fontSize: 15,
-              fontWeight: 500,
+              fontSize: "0.9rem",
+              fontWeight: 540,
               textDecoration: "none",
               letterSpacing: "-0.02em",
             }}
             className="nav-link"
           >
-            about
+            index
           </Link>
         )}
       </div>

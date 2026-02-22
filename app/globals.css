@@ -56,12 +56,7 @@ body {
     border-right-color: var(--dashed-border-color);
 }
 
-/* ——— Section: dashed border-top ——— */
-.section {
-    border-top-width: var(--dashed-border-width);
-    border-top-style: var(--dashed-border-style);
-    border-top-color: var(--dashed-border-color);
-}
+/* ——— Section: no border-top; divider lives on last list item ——— */
 
 /* ——— List group: dim-on-hover mechanic ———
    When any item in the list is hovered, all siblings dim
@@ -78,6 +73,11 @@ body {
     border-top-width: var(--dashed-border-width);
     border-top-style: var(--dashed-border-style);
     border-top-color: var(--dashed-border-color);
+}
+
+.list-group > :last-child {
+    border-bottom: var(--dashed-border-width) var(--dashed-border-style)
+        var(--dashed-border-color) !important;
 }
 
 .list-group-item {
@@ -119,7 +119,7 @@ a.meta-address:hover {
 .nav-link {
     font-size: 1rem;
     font-weight: 500;
-    color: rgba(17, 17, 17, 0.5);
+    color: rgba(17, 17, 17, 0.37);
     text-decoration: none;
     transition: color 0.15s ease;
 }

@@ -8,24 +8,38 @@ type Heading = {
 };
 
 export default function TableOfContents() {
-  const [headings, setHeadings] = useState<Heading[]>([]);
+  const [h1Heading, setH1Heading] = useState<Heading | null>(null);
+  const [h2Headings, setH2Headings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>("");
   const [topOffset, setTopOffset] = useState<number>(0);
   const navRef = useRef<HTMLElement>(null);
 
-  // Extract h2 headings from the DOM on mount
+  // Extract h1 + h2 headings from the DOM on mount
   useEffect(() => {
     const article = document.querySelector(".essay-article");
     if (!article) return;
 
+    // Grab the h1 title
+    const h1 = article.querySelector("h1.mdx-h1[id]");
+    if (h1) {
+      setH1Heading({ id: h1.id, text: h1.textContent || "" });
+      setActiveId(h1.id);
+    }
+
+    // Grab h2s, excluding footnotes
     const h2s = article.querySelectorAll("h2[id]");
     const items: Heading[] = [];
     h2s.forEach((el) => {
       if (el.closest(".footnotes")) return;
       items.push({ id: el.id, text: el.textContent || "" });
     });
-    setHeadings(items);
+    setH2Headings(items);
   }, []);
+
+  // Build the full list: h1 first, then h2s
+  const allHeadings: Heading[] = [];
+  if (h1Heading) allHeadings.push(h1Heading);
+  allHeadings.push(...h2Headings);
 
   // Compute the h1's document-level top (independent of scroll).
   // For position:fixed, this gives us the viewport-top the h1 sits at
@@ -42,11 +56,11 @@ export default function TableOfContents() {
     requestAnimationFrame(updateTop);
     window.addEventListener("resize", updateTop);
     return () => window.removeEventListener("resize", updateTop);
-  }, [headings]);
+  }, [h2Headings]);
 
   // Track active section with IntersectionObserver
   useEffect(() => {
-    if (headings.length === 0) return;
+    if (allHeadings.length === 0) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -64,7 +78,7 @@ export default function TableOfContents() {
       },
     );
 
-    headings.forEach(({ id }) => {
+    allHeadings.forEach(({ id }) => {
       const el = document.getElementById(id);
       if (el) {
         const wrapper = el.closest(".mdx-h2-wrapper") || el;
@@ -73,19 +87,20 @@ export default function TableOfContents() {
     });
 
     return () => observer.disconnect();
-  }, [headings]);
+  }, [h1Heading, h2Headings]);
 
   // Track scroll for edge cases (top of page, bottom of page)
   const handleScroll = useCallback(() => {
-    if (headings.length === 0) return;
+    if (allHeadings.length === 0) return;
 
+    // Near the top of the page → activate h1
     if (window.scrollY < 100) {
-      setActiveId("");
+      setActiveId(allHeadings[0].id);
       return;
     }
 
     let current = "";
-    for (const { id } of headings) {
+    for (const { id } of allHeadings) {
       const el = document.getElementById(id);
       if (!el) continue;
       const wrapper = el.closest(".mdx-h2-wrapper") || el;
@@ -97,14 +112,15 @@ export default function TableOfContents() {
     if (current) {
       setActiveId(current);
     }
-  }, [headings]);
+  }, [h1Heading, h2Headings]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  if (headings.length === 0) return null;
+  // Only render when there is at least one h2 (excluding footnotes)
+  if (h2Headings.length === 0) return null;
 
   return (
     <nav
@@ -125,7 +141,7 @@ export default function TableOfContents() {
           gap: 4,
         }}
       >
-        {headings.map(({ id, text }) => (
+        {allHeadings.map(({ id, text }) => (
           <li key={id}>
             <a
               href={`#${id}`}
