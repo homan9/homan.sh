@@ -88,7 +88,7 @@ export default function Home() {
         <Section>
           <SectionHeader
             title="Pending invitations"
-            caption="i'd be honored to have them in the village."
+            caption="i'd be honored to have these people join the village."
           />
           <Suspense fallback={<ListPlaceholder rows={5} />}>
             <InvitationList />

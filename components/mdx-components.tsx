@@ -39,11 +39,11 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         className="mdx-h1"
         style={{
           scrollMarginTop: "3rem",
-          fontSize: 18,
-          fontWeight: 500,
+          fontSize,
+          fontWeight: 580,
           letterSpacing: "-0.02em",
           color: "rgba(17, 17, 17, 1.0)",
-          marginBottom: "2rem",
+          marginBottom: "1.1rem",
           lineHeight: 1.2,
           textAlign: "left",
         }}
@@ -281,7 +281,14 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         {children}
       </strong>
     ),
-    em: ({ children, ...props }) => <em {...props}>{children}</em>,
+    em: ({ children, ...props }) => (
+      <em
+        style={{ fontWeight: 520, color: "rgba(17, 17, 17, 0.35)" }}
+        {...props}
+      >
+        {children}
+      </em>
+    ),
     table: ({ children, ...props }) => (
       <div
         style={{
