@@ -33,13 +33,13 @@ const items: AboutItem[] = [
     href: "/valuation",
   },
   {
-    title: "Creating your villager account",
-    href: "/personal-token",
+    title: "Create your villager account",
+    href: "/create-account",
   },
   {
     title: "Welcome to the village!",
     caption: "villager onboarding & resources",
-    href: "/invitation",
+    href: "/welcome",
   },
   {
     title: "Village smart contract",

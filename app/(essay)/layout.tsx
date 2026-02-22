@@ -12,7 +12,6 @@ export default function EssayLayout({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        minHeight: "100vh",
         background: "#fff",
       }}
     >

@@ -374,6 +374,20 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         {children}
       </td>
     ),
+    Caption: ({ children }) => (
+      <p
+        style={{
+          fontSize,
+          fontWeight: 480,
+          letterSpacing,
+          lineHeight,
+          color: "rgba(17, 17, 17, 0.37)",
+          marginBottom,
+        }}
+      >
+        {children}
+      </p>
+    ),
     ...overrides,
   };
 }
