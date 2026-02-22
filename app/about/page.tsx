@@ -1,58 +1,84 @@
-import React from "react";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { getMdxSource } from "@/lib/mdx";
 import PersonalTokenScene from "@/visualizations/personal-token/PersonalTokenScene";
-import AboutLink from "@/components/about-link";
+import List from "@/components/ui/list";
+import BaseListItem from "@/components/ui/list-item";
+import ExternalArrow from "@/components/ui/external-arrow";
 import type { Metadata } from "next";
-import type { MDXComponents } from "mdx/types";
 
 export const metadata: Metadata = {
   title: "about",
 };
 
-const fontSize = "1rem";
-const fontWeight = 450;
-const letterSpacing = "-0.025em";
-const lineHeight = "1.3rem";
-const color = "rgba(17, 17, 17, 0.43)";
+type AboutItem = {
+  title: string;
+  caption?: string;
+  href: string;
+  external?: boolean;
+};
 
-function getAboutComponents(): MDXComponents {
-  return {
-    p: ({ children }) => {
-      const arr = React.Children.toArray(children);
-      const isSoloLink =
-        arr.length === 1 &&
-        React.isValidElement(arr[0]) &&
-        (arr[0] as React.ReactElement<{ href?: string }>).props.href != null;
+const items: AboutItem[] = [
+  {
+    title: "My token",
+    caption: "overview, why, mechanics, the village, trust, faq.",
+    href: "/my-token",
+  },
+  {
+    title: "Whitepaper",
+    caption: "personal token v0.1",
+    href: "https://github.com/homan9/personal-token/blob/main/whitepaper.md",
+    external: true,
+  },
+  {
+    title: "What is a personal token worth?",
+    caption: "how i think about valuation",
+    href: "/valuation",
+  },
+  {
+    title: "Creating your villager account",
+    href: "/personal-token",
+  },
+  {
+    title: "Welcome to the village!",
+    caption: "villager onboarding & resources",
+    href: "/invitation",
+  },
+  {
+    title: "Village smart contract",
+    caption: "0xA2C7d149fD50A277313F2349A558fdD59FCC6bCA",
+    href: "https://basescan.org/address/0xA2C7d149fD50A277313F2349A558fdD59FCC6bCA",
+    external: true,
+  },
+  {
+    title: "Onchain source",
+    caption: "for whitepaper, smart contract code.",
+    href: "https://github.com/homan9/personal-token",
+    external: true,
+  },
+  {
+    title: "Website source",
+    caption: "for homantoken.com",
+    href: "https://github.com/homan9/homan",
+    external: true,
+  },
+];
 
-      if (isSoloLink) return <>{children}</>;
+const titleStyle: React.CSSProperties = {
+  fontSize: 16,
+  fontWeight: 500,
+  color: "#111",
+  letterSpacing: "-0.02em",
+  lineHeight: 1.4,
+};
 
-      return (
-        <p style={{ fontSize, fontWeight, letterSpacing, lineHeight, color }}>
-          {children}
-        </p>
-      );
-    },
-    a: ({ href, children }) => {
-      return <AboutLink href={href ?? "#"}>{children}</AboutLink>;
-    },
-    hr: () => (
-      <hr
-        style={{
-          border: "none",
-          borderTop: "1px solid rgba(0, 0, 0, 0.08)",
-          margin: "2rem 0",
-        }}
-      />
-    ),
-  };
-}
+const captionStyle: React.CSSProperties = {
+  fontSize: 14,
+  fontWeight: 500,
+  color: "rgba(17, 17, 17, 0.4)",
+  letterSpacing: "-0.01em",
+  lineHeight: 1.4,
+  marginTop: 1,
+};
 
-const components = getAboutComponents();
-
-export default async function AboutPage() {
-  const { content } = await getMdxSource("about.mdx");
-
+export default function AboutPage() {
   return (
     <div
       style={{
@@ -64,16 +90,36 @@ export default async function AboutPage() {
       }}
     >
       <div
+        className="page-container"
         style={{
           width: "100%",
-          maxWidth: 450,
-          padding: "6rem 1.5rem 6rem",
+          maxWidth: 500,
         }}
       >
-        <PersonalTokenScene fill />
+        {/* Visualization — padded, dashed bottom border */}
+        <div className="section" style={{ padding: 24, borderTopWidth: 0 }}>
+          <PersonalTokenScene fill />
+        </div>
 
-        <div style={{ marginTop: "2rem" }}>
-          <MDXRemote source={content} components={components} />
+        {/* Links list */}
+        <div style={{ paddingBottom: 64 }}>
+          <List>
+            {items.map((item) => (
+              <BaseListItem
+                key={item.title}
+                href={item.href}
+                external={item.external}
+              >
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={titleStyle}>{item.title}</div>
+                  {item.caption && (
+                    <div style={captionStyle}>{item.caption}</div>
+                  )}
+                </div>
+                {item.external && <ExternalArrow />}
+              </BaseListItem>
+            ))}
+          </List>
         </div>
       </div>
     </div>
