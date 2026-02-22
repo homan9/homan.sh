@@ -4,11 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const CONSTRAINED_ROUTES = ["/", "/index"];
+const CONSTRAINED_ROUTES = ["/", "/about"];
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isAboutPage = pathname === "/index";
+  const isAboutPage = pathname === "/about";
   const isConstrained = CONSTRAINED_ROUTES.includes(pathname);
 
   return (
@@ -52,7 +52,7 @@ export default function Navbar() {
 
         {!isAboutPage && (
           <Link
-            href="/index"
+            href="/about"
             style={{
               fontSize: "0.9rem",
               fontWeight: 540,

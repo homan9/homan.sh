@@ -1,6 +1,7 @@
 import React, { type ReactNode } from "react";
 import { GeistMono } from "geist/font/mono";
 import Mermaid from "@/components/mermaid";
+import MuxVideo from "@/components/mux-video";
 import type { MDXComponents } from "mdx/types";
 
 function slugify(children: ReactNode): string {
@@ -374,6 +375,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         {children}
       </td>
     ),
+    Video: ({ id }: { id: string }) => <MuxVideo playbackId={id} />,
     Caption: ({ children }) => (
       <p
         style={{
