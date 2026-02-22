@@ -283,7 +283,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
     ),
     em: ({ children, ...props }) => (
       <em
-        style={{ fontWeight: 520, color: "rgba(17, 17, 17, 0.35)" }}
+        style={{ fontWeight: 520, color: "rgba(17, 17, 17, 0.5)" }}
         {...props}
       >
         {children}
@@ -304,7 +304,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
           style={{
             width: "100%",
             fontFamily: `${GeistMono.style.fontFamily}, monospace`,
-            fontSize: 15,
+            fontSize,
             fontWeight: 400,
             letterSpacing: "0",
             lineHeight: "1.2",
