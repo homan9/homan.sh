@@ -130,7 +130,7 @@ async function InvitationContent({ slug }: { slug: string }) {
       <p style={blockquoteStyle}>
         There is no obligation to buy or trade shares of my token. By joining
         the village, you simply give yourself the option to. If you're
-        interested, DM me your onchain address and I'll get your account set up
+        interested, DM me your onchain address and I 'll get your account set up
         :)
       </p>
     </div>

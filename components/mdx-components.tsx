@@ -1,5 +1,6 @@
-import { type ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { GeistMono } from "geist/font/mono";
+import Mermaid from "@/components/mermaid";
 import type { MDXComponents } from "mdx/types";
 
 function slugify(children: ReactNode): string {
@@ -229,21 +230,32 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         {children}
       </code>
     ),
-    pre: ({ children, ...props }) => (
-      <pre
-        style={{
-          background: "rgba(17, 17, 17, 0.04)",
-          borderRadius: 6,
-          padding: "1rem",
-          overflowX: "auto",
-          marginBottom: "1rem",
-          fontSize: "0.9rem",
-        }}
-        {...props}
-      >
-        {children}
-      </pre>
-    ),
+    pre: ({ children, ...props }) => {
+      if (React.isValidElement(children)) {
+        const child = children as React.ReactElement<{
+          className?: string;
+          children?: string;
+        }>;
+        if (child.props.className === "language-mermaid") {
+          return <Mermaid chart={child.props.children ?? ""} />;
+        }
+      }
+      return (
+        <pre
+          style={{
+            background: "rgba(17, 17, 17, 0.04)",
+            borderRadius: 6,
+            padding: "1rem",
+            overflowX: "auto",
+            marginBottom: "1rem",
+            fontSize: "0.9rem",
+          }}
+          {...props}
+        >
+          {children}
+        </pre>
+      );
+    },
     strong: ({ children, ...props }) => (
       <strong style={{ fontWeight: 560, color: "#111" }} {...props}>
         {children}
