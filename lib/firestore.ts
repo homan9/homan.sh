@@ -22,10 +22,12 @@ export async function getVillagerById(id: string): Promise<Villager | null> {
 
 export async function getInvitations(): Promise<Invitation[]> {
   const snapshot = await getDocs(collection(db, INVITATIONS_COLLECTION));
-  return snapshot.docs.map((d) => {
-    const data = d.data() as Omit<Invitation, "id">;
-    return { id: d.id, ...data };
-  });
+  return snapshot.docs
+    .filter((d) => !d.data().isPaused)
+    .map((d) => {
+      const data = d.data() as Omit<Invitation, "id">;
+      return { id: d.id, ...data };
+    });
 }
 
 export async function getInvitationBySlug(

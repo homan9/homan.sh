@@ -14,6 +14,7 @@ export type Invitation = {
   displayName: string;
   profilePicSrc: string;
   videoID: string;
+  isPaused?: boolean;
 };
 
 export type TokenOwner = {
