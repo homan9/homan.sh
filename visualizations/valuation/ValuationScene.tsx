@@ -19,9 +19,13 @@ import "../core.css";
 export default function ValuationScene() {
   const [mounted, setMounted] = useState(false);
   const [key, setKey] = useState(0);
+  const [canHover, setCanHover] = useState(false);
   const replay = useCallback(() => setKey((k) => k + 1), []);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    setCanHover(window.matchMedia("(hover: hover)").matches);
+  }, []);
   if (!mounted)
     return (
       <div
@@ -37,7 +41,7 @@ export default function ValuationScene() {
     <div
       className="vis-scene"
       onClick={replay}
-      onMouseEnter={replay}
+      onMouseEnter={canHover ? replay : undefined}
       style={{ maxWidth: VIEW }}
     >
       <style>

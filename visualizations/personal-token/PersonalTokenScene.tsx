@@ -85,9 +85,13 @@ type PersonalTokenSceneProps = {
 export default function PersonalTokenScene({ fill }: PersonalTokenSceneProps) {
   const [mounted, setMounted] = useState(false);
   const [key, setKey] = useState(0);
+  const [canHover, setCanHover] = useState(false);
   const replay = useCallback(() => setKey((k) => k + 1), []);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    setCanHover(window.matchMedia("(hover: hover)").matches);
+  }, []);
   if (!mounted)
     return (
       <div
@@ -105,7 +109,7 @@ export default function PersonalTokenScene({ fill }: PersonalTokenSceneProps) {
     <div
       className="vis-scene"
       onClick={replay}
-      onMouseEnter={replay}
+      onMouseEnter={canHover ? replay : undefined}
       style={
         {
           maxWidth: fill ? undefined : VIEW,

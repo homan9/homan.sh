@@ -132,12 +132,14 @@
         transition: opacity 0.2s ease;
     }
 
-    .list-group:has(.list-group-item:hover) .list-group-item {
-        opacity: 0.35;
-    }
+    @media (hover: hover) {
+        .list-group:has(.list-group-item:hover) .list-group-item {
+            opacity: 0.35;
+        }
 
-    .list-group:has(.list-group-item:hover) .list-group-item:hover {
-        opacity: 1;
+        .list-group:has(.list-group-item:hover) .list-group-item:hover {
+            opacity: 1;
+        }
     }
 
     /* ——— Metadata address links ——— */
