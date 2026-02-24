@@ -37,10 +37,8 @@ export default function ProfileHeader() {
         }}
       >
         <Bio>welcome to my personal token!</Bio>
-        <Bio>
-          it represents the value I will create over my life (capital gains). so
-          that i can share my upside across everything i do in life!
-        </Bio>
+        <Bio>it represents my capital gains over life.</Bio>
+        <Bio>so that i can share success across everything i will ever do!</Bio>
       </div>
     </div>
   );
