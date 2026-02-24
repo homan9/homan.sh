@@ -283,10 +283,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       </strong>
     ),
     em: ({ children, ...props }) => (
-      <em
-        style={{ fontWeight: 520, color: "rgba(17, 17, 17, 0.5)" }}
-        {...props}
-      >
+      <em style={{ fontWeight: 480, color: "rgba(17, 17, 17, 1)" }} {...props}>
         {children}
       </em>
     ),
