@@ -106,6 +106,13 @@
         border-right-color: var(--dashed-border-color);
     }
 
+    @media (max-width: 500px) {
+        .page-container {
+            border-left: none;
+            border-right: none;
+        }
+    }
+
     /* ——— List group: dim-on-hover mechanic ———
        When any item in the list is hovered, all siblings dim
        and only the hovered item stays fully visible.

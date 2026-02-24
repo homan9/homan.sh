@@ -12,7 +12,7 @@ export default function MuxVideo({ playbackId, title }: MuxVideoProps) {
     <div
       style={{
         width: "100%",
-        aspectRatio: "16 / 9",
+        aspectRatio: "1/1",
         overflow: "hidden",
         background: "#000",
       }}
