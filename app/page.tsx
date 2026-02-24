@@ -1,5 +1,7 @@
 import { Suspense } from "react";
+
 import MuxVideo from "@/components/mux-video";
+import ProfileHeader from "@/components/profile-header";
 import Section from "@/components/ui/section";
 import SectionHeader from "@/components/ui/section-header";
 import VillagerList from "@/components/villager-list";
@@ -68,17 +70,21 @@ export default function Home() {
           paddingBottom: 64,
         }}
       >
+        {/* Profile Header */}
+        <ProfileHeader />
+
         {/* Hero Video */}
         <MuxVideo
           playbackId="V4EyWaRR6iTK97HBNNoMtArCQwjGMbvy7sXygtoQwdI"
           title="homan"
+          thumbnailTime={2}
         />
 
         {/* Village Section */}
         <Section>
           <SectionHeader
             title="Village"
-            caption="can freely trade shares of my token amongst themselves."
+            caption="a curated group who can buy shares of my token, and freely trade my shares amongst themselves."
           />
           <Suspense fallback={<ListPlaceholder rows={4} />}>
             <VillagerList />

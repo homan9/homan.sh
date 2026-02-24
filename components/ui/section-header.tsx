@@ -28,7 +28,7 @@ export default function SectionHeader({ title, caption }: SectionHeaderProps) {
             fontWeight: 500,
             color: "rgba(17, 17, 17, 0.35)",
             letterSpacing: "-0.02em",
-            lineHeight: 1.5,
+            lineHeight: 1.25,
             margin: 0,
             marginTop: 4,
           }}

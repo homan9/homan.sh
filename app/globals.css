@@ -1,280 +1,293 @@
-@import "tailwindcss";
+/* ——— Variables ——— */
+:root {
+    --color-primary: #111111;
+    --color-link: #0084ff;
+    --color-link-hover: #0066cc;
+    --background: #ffffff;
+    --invitation-caption-size: 24px;
+    --invitation-georgia-size: 25px;
 
-@theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--color-primary);
+    /* ——— Design system: dashed border ——— */
+    --dashed-border-color: rgba(17, 17, 17, 0.06);
+    --dashed-border-width: 1px;
+    --dashed-border-style: dashed;
 }
 
-@layer base {
-    :root {
-        --color-primary: #111111;
-        --color-link: #0084ff;
-        --color-link-hover: #0066cc;
-        --background: #ffffff;
-        --invitation-caption-size: 24px;
-        --invitation-georgia-size: 25px;
+/* ——— Base reset ——— */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        /* ——— Design system: dashed border ——— */
-        --dashed-border-color: rgba(17, 17, 17, 0.06);
-        --dashed-border-width: 1px;
-        --dashed-border-style: dashed;
-    }
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+body {
+    background: var(--background);
+    color: var(--color-primary);
+    font-size: 1.125rem;
+    font-weight: 420;
+    line-height: 1.6;
+    letter-spacing: -0.03em;
+}
 
-    html {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-    body {
-        background: var(--background);
-        color: var(--color-primary);
-        font-size: 1.125rem;
-        font-weight: 420;
-        line-height: 1.6;
-        letter-spacing: -0.03em;
-    }
+hr {
+    border: none;
+    border-top-width: var(--dashed-border-width);
+    border-top-style: var(--dashed-border-style);
+    border-top-color: var(--dashed-border-color);
+}
 
-    /* ——— General resets ——— */
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
+/* ——— Scrollbar ——— */
+::-webkit-scrollbar {
+    width: 6px;
+}
 
-    hr {
-        border: none;
-        border-top-width: var(--dashed-border-width);
-        border-top-style: var(--dashed-border-style);
-        border-top-color: var(--dashed-border-color);
-    }
+::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-    /* ——— Scrollbar ——— */
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
+::-webkit-scrollbar-thumb {
+    background: rgba(17, 17, 17, 0.15);
+    border-radius: 3px;
+}
 
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
+/* ——— Blockquote ——— */
+blockquote p {
+    color: rgba(17, 17, 17, 0.6);
+}
 
-    ::-webkit-scrollbar-thumb {
-        background: rgba(17, 17, 17, 0.15);
-        border-radius: 3px;
-    }
+/* ——— MDX H1 ——— */
+.mdx-h1 {
+    font-size: 1.5rem;
+}
 
-    /* ——— Blockquote ——— */
-    blockquote p {
-        color: rgba(17, 17, 17, 0.6) !important;
-    }
-
-    /* ——— MDX H1 ——— */
+@media (max-width: 640px) {
     .mdx-h1 {
         font-size: 1.5rem;
     }
-
-    @media (max-width: 640px) {
-        .mdx-h1 {
-            font-size: 1.5rem;
-        }
-        :root {
-            --invitation-caption-size: 20px;
-            --invitation-georgia-size: 21px;
-        }
+    :root {
+        --invitation-caption-size: 20px;
+        --invitation-georgia-size: 21px;
     }
 }
 
-@layer components {
-    /* ——— Navbar: dashed border-bottom ——— */
-    .navbar {
-        border-bottom-width: var(--dashed-border-width);
-        border-bottom-style: var(--dashed-border-style);
-        border-bottom-color: var(--dashed-border-color);
-    }
+/* ——— Navbar: dashed border-bottom ——— */
+.navbar {
+    border-bottom-width: var(--dashed-border-width);
+    border-bottom-style: var(--dashed-border-style);
+    border-bottom-color: var(--dashed-border-color);
+}
 
-    /* ——— Page container with dashed side borders ——— */
+/* ——— Page container with dashed side borders ——— */
+.page-container {
+    border-left-width: var(--dashed-border-width);
+    border-left-style: var(--dashed-border-style);
+    border-left-color: var(--dashed-border-color);
+    border-right-width: var(--dashed-border-width);
+    border-right-style: var(--dashed-border-style);
+    border-right-color: var(--dashed-border-color);
+}
+
+@media (max-width: 500px) {
     .page-container {
-        border-left-width: var(--dashed-border-width);
-        border-left-style: var(--dashed-border-style);
-        border-left-color: var(--dashed-border-color);
-        border-right-width: var(--dashed-border-width);
-        border-right-style: var(--dashed-border-style);
-        border-right-color: var(--dashed-border-color);
+        border-left: none;
+        border-right: none;
+    }
+}
+
+/* ——— List group: dim-on-hover mechanic ———
+   When any item in the list is hovered, all siblings dim
+   and only the hovered item stays fully visible.
+   This creates a "spotlight" effect. */
+.list-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-group-item,
+.list-group-passive {
+    border-top-width: var(--dashed-border-width);
+    border-top-style: var(--dashed-border-style);
+    border-top-color: var(--dashed-border-color);
+}
+
+.list-group > :last-child {
+    border-bottom: var(--dashed-border-width) var(--dashed-border-style)
+        var(--dashed-border-color);
+}
+
+.list-group-item {
+    transition: opacity 0.2s ease;
+}
+
+@media (hover: hover) {
+    .list-group:has(.list-group-item:hover) .list-group-item {
+        opacity: 0.35;
     }
 
-    @media (max-width: 500px) {
-        .page-container {
-            border-left: none;
-            border-right: none;
-        }
+    .list-group:has(.list-group-item:hover) .list-group-item:hover {
+        opacity: 1;
     }
+}
 
-    /* ——— List group: dim-on-hover mechanic ———
-       When any item in the list is hovered, all siblings dim
-       and only the hovered item stays fully visible.
-       This creates a "spotlight" effect. */
-    .list-group {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+/* ——— Metadata address links ——— */
+a.meta-address {
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    display: inline-block;
+    vertical-align: bottom;
+}
 
-    .list-group-item,
-    .list-group-passive {
-        border-top-width: var(--dashed-border-width);
-        border-top-style: var(--dashed-border-style);
-        border-top-color: var(--dashed-border-color);
-    }
+a.meta-address:hover {
+    color: rgba(17, 17, 17, 0.8);
+    text-decoration: underline;
+    text-decoration-color: rgba(17, 17, 17, 0.2);
+    text-underline-offset: 3px;
+}
 
-    .list-group > :last-child {
-        border-bottom: var(--dashed-border-width) var(--dashed-border-style)
-            var(--dashed-border-color) !important;
-    }
+/* ——— Navbar link style ——— */
+.nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(17, 17, 17, 0.37);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
 
-    .list-group-item {
-        transition: opacity 0.2s ease;
-    }
+.nav-link:hover {
+    color: rgba(17, 17, 17, 1);
+}
 
-    @media (hover: hover) {
-        .list-group:has(.list-group-item:hover) .list-group-item {
-            opacity: 0.35;
-        }
+/* ——— Navbar CTA badge ——— */
+.nav-cta {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 0.9rem;
+    font-weight: 540;
+    letter-spacing: -0.02em;
+    color: var(--color-link);
+    text-decoration: none;
+    background: rgba(0, 132, 255, 0.08);
+    border-radius: 4px;
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
 
-        .list-group:has(.list-group-item:hover) .list-group-item:hover {
-            opacity: 1;
-        }
-    }
+.nav-cta:hover {
+    background: rgba(0, 132, 255, 0.14);
+    box-shadow: 0 0 0 3px rgba(0, 132, 255, 0.06);
+}
 
-    /* ——— Metadata address links ——— */
-    a.meta-address {
-        color: inherit;
-        font: inherit;
-        letter-spacing: inherit;
-        text-decoration: none !important;
-        transition: color 0.15s ease;
-        cursor: pointer;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        max-width: 100%;
-        display: inline-block;
-        vertical-align: bottom;
-    }
+/* ——— Bio / read-more link ——— */
+.link-readmore {
+    color: #0084ff;
+    text-decoration: underline;
+    text-decoration-color: #0084ff;
+    text-underline-offset: 3px;
+    transition:
+        color 0.15s ease,
+        text-decoration-color 0.15s ease;
+}
 
-    a.meta-address:hover {
-        color: rgba(17, 17, 17, 0.8) !important;
-        text-decoration: underline !important;
-        text-decoration-color: rgba(17, 17, 17, 0.2) !important;
-        text-underline-offset: 3px;
-    }
+.link-readmore:hover {
+    color: #0066cc;
+    text-decoration-color: #0066cc;
+}
 
-    /* ——— Navbar link style ——— */
-    .nav-link {
-        font-size: 1rem;
-        font-weight: 500;
-        color: rgba(17, 17, 17, 0.37);
-        text-decoration: none;
-        transition: color 0.15s ease;
-    }
+/* ——— Table of Contents (desktop sidebar) ——— */
+.toc {
+    position: fixed;
+    right: calc(50% + 275px + 48px);
+    width: 180px;
+    z-index: 40;
+}
 
-    .nav-link:hover {
-        color: rgba(17, 17, 17, 1);
-    }
+.toc-item {
+    color: rgba(17, 17, 17, 0.32);
+}
 
-    /* ——— Bio / read-more link ——— */
-    .link-readmore {
-        color: #0084ff;
-        text-decoration: underline;
-        text-decoration-color: #0084ff;
-        text-underline-offset: 3px;
-        transition:
-            color 0.15s ease,
-            text-decoration-color 0.15s ease;
-    }
+.toc-item:hover {
+    color: rgba(17, 17, 17, 1);
+}
 
-    .link-readmore:hover {
-        color: #0066cc;
-        text-decoration-color: #0066cc;
-    }
+.toc-item[data-active="true"] {
+    color: #111;
+    font-weight: 500;
+}
 
-    /* ——— Table of Contents (desktop sidebar) ——— */
+@media (max-width: 1100px) {
     .toc {
-        position: fixed;
-        right: calc(50% + 275px + 48px);
-        width: 180px;
-        z-index: 40;
+        display: none;
     }
+}
 
-    .toc-item {
-        color: rgba(17, 17, 17, 0.32);
-    }
+/* ——— Essay article padding ——— */
+.essay-article {
+    padding: 48px 48px 96px;
+}
 
-    .toc-item:hover {
-        color: rgba(17, 17, 17, 1);
-    }
+.essay-article .mdx-h2-wrapper {
+    margin-right: -48px;
+    scroll-margin-top: 5rem;
+}
 
-    .toc-item[data-active="true"] {
-        color: #111;
-        font-weight: 500 !important;
-    }
-
-    @media (max-width: 1100px) {
-        .toc {
-            display: none;
-        }
-    }
-
-    /* ——— Essay article padding ——— */
+@media (max-width: 640px) {
     .essay-article {
-        padding: 48px 48px 96px;
+        padding: 48px 24px 96px;
     }
-
     .essay-article .mdx-h2-wrapper {
-        margin-right: -48px !important;
-        scroll-margin-top: 5rem;
+        margin-right: -24px;
     }
+}
 
-    @media (max-width: 640px) {
-        .essay-article {
-            padding: 48px 24px 96px;
-        }
-        .essay-article .mdx-h2-wrapper {
-            margin-right: -24px !important;
-        }
-    }
+/* ——— About page links ——— */
+.about-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem 0.75rem;
+    margin: 0 -0.75rem;
+    width: calc(100% + 1.5rem);
+    border-radius: 6px;
+    transition: background 0.15s ease;
+    text-decoration: none;
+    color: rgba(17, 17, 17, 0.7);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+}
 
-    /* ——— About page links ——— */
-    .about-link {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.3rem 0.75rem;
-        margin: 0 -0.75rem;
-        width: calc(100% + 1.5rem);
-        border-radius: 6px;
-        transition: background 0.15s ease;
-        text-decoration: none;
-        color: rgba(17, 17, 17, 0.7);
-        font-size: 1rem;
-        font-weight: 500;
-        letter-spacing: -0.035em;
-    }
+.about-link:hover {
+    background: rgba(17, 17, 17, 0.04);
+    color: rgba(17, 17, 17, 1);
+}
 
-    .about-link:hover {
-        background: rgba(17, 17, 17, 0.04);
-        color: rgba(17, 17, 17, 1);
-    }
+.about-link-arrow {
+    color: rgba(17, 17, 17, 0.2);
+    transition: color 0.15s ease;
+}
 
-    .about-link-arrow {
-        color: rgba(17, 17, 17, 0.2) !important;
-        transition: color 0.15s ease;
-    }
-
-    .about-link:hover .about-link-arrow {
-        color: #111;
-    }
+.about-link:hover .about-link-arrow {
+    color: #111;
 }

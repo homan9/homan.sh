@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -10,6 +11,32 @@ export default function Navbar() {
   const pathname = usePathname();
   const isAboutPage = pathname === "/about";
   const isConstrained = CONSTRAINED_ROUTES.includes(pathname);
+  const isHome = pathname === "/";
+  const [showPic, setShowPic] = useState(!isHome);
+
+  const showIndex = !isHome && !isAboutPage;
+  const showCta = isHome;
+
+  useEffect(() => {
+    const target = document.getElementById("profile-pic");
+    if (!target) {
+      setShowPic(true);
+      return;
+    }
+
+    // Body profile pic exists — hide navbar pic while it's visible
+    setShowPic(false);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowPic(!entry.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [pathname]);
 
   return (
     <nav
@@ -36,7 +63,14 @@ export default function Navbar() {
           justifyContent: "space-between",
         }}
       >
-        <Link href="/">
+        <Link
+          href="/"
+          style={{
+            opacity: showPic ? 1 : 0,
+            pointerEvents: showPic ? "auto" : "none",
+            transition: "opacity 0.2s ease",
+          }}
+        >
           <Image
             src="/homan.png"
             alt="homan"
@@ -50,20 +84,33 @@ export default function Navbar() {
           />
         </Link>
 
-        {!isAboutPage && (
-          <Link
-            href="/about"
-            style={{
-              fontSize: "0.9rem",
-              fontWeight: 540,
-              textDecoration: "none",
-              letterSpacing: "-0.02em",
-            }}
-            className="nav-link"
-          >
-            index
-          </Link>
-        )}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          {showIndex && (
+            <Link
+              href="/about"
+              style={{
+                fontSize: "0.9rem",
+                fontWeight: 540,
+                textDecoration: "none",
+                letterSpacing: "-0.02em",
+              }}
+              className="nav-link"
+            >
+              index
+            </Link>
+          )}
+          {showCta && (
+            <Link href="/how" className="nav-cta">
+              how it works
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );

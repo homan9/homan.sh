@@ -1,16 +1,14 @@
-import Image from "next/image";
 import { GeistMono } from "geist/font/mono";
 import { getVillagers } from "@/lib/firestore";
 import List from "@/components/ui/list";
 import BaseListItem from "@/components/ui/list-item";
+import AvatarName from "@/components/ui/avatar-name";
 
 const homan = {
   id: "0",
   displayName: "homan",
   profilePicSrc: "/homan.png",
 };
-
-const avatarSize = 36;
 
 export default async function VillagerList() {
   const villagers = await getVillagers();
@@ -61,36 +59,10 @@ export default async function VillagerList() {
       {/* Villager rows */}
       {allVillagers.map((villager) => (
         <BaseListItem key={villager.id} href={`/villager/${villager.id}`}>
-          {villager.profilePicSrc ? (
-            <Image
-              src={villager.profilePicSrc}
-              alt={villager.displayName}
-              width={avatarSize}
-              height={avatarSize}
-              style={{ borderRadius: "50%", flexShrink: 0 }}
-            />
-          ) : (
-            <div
-              style={{
-                width: avatarSize,
-                height: avatarSize,
-                borderRadius: "50%",
-                background: "#e4e4e7",
-                flexShrink: 0,
-              }}
-            />
-          )}
-          <span
-            style={{
-              fontSize: 16,
-              fontWeight: 500,
-              letterSpacing: "-0.03em",
-              color: "#111",
-              flexShrink: 0,
-            }}
-          >
-            {villager.displayName}
-          </span>
+          <AvatarName
+            src={villager.profilePicSrc}
+            name={villager.displayName}
+          />
 
           {/* Dashed separator within the row */}
           <span

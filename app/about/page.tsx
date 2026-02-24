@@ -13,23 +13,22 @@ type AboutItem = {
   caption?: string;
   href: string;
   external?: boolean;
+  isCTA?: boolean;
 };
 
 const items: AboutItem[] = [
   {
-    title: "My token",
-    caption: "overview, why, mechanics, the village, trust, faq.",
-    href: "/my-token",
+    title: "How it works",
+    href: "/how",
+    isCTA: true,
   },
   {
     title: "Whitepaper",
-    caption: "personal token v0.1",
     href: "https://github.com/homan9/personal-token/blob/main/whitepaper.md",
     external: true,
   },
   {
     title: "What is a personal token worth?",
-    caption: "how i think about valuation",
     href: "/valuation",
   },
   {
@@ -38,25 +37,21 @@ const items: AboutItem[] = [
   },
   {
     title: "Welcome to the village!",
-    caption: "villager onboarding & resources",
     href: "/welcome",
   },
   {
     title: "Village smart contract",
-    caption: "0xA2C7d149fD50A277313F2349A558fdD59FCC6bCA",
     href: "https://basescan.org/address/0xA2C7d149fD50A277313F2349A558fdD59FCC6bCA",
     external: true,
   },
   {
-    title: "Onchain source",
-    caption: "for whitepaper, smart contract code.",
+    title: "Onchain source code",
     href: "https://github.com/homan9/personal-token",
     external: true,
   },
   {
-    title: "Website source",
-    caption: "for homantoken.com",
-    href: "https://github.com/homan9/homan",
+    title: "Website source code",
+    href: "https://github.com/homan9/homan.sh",
     external: true,
   },
 ];
@@ -67,6 +62,11 @@ const titleStyle: React.CSSProperties = {
   color: "#111",
   letterSpacing: "-0.02em",
   lineHeight: 1.4,
+};
+
+const ctaTitleStyle: React.CSSProperties = {
+  ...titleStyle,
+  color: "var(--color-link)",
 };
 
 const captionStyle: React.CSSProperties = {
@@ -111,7 +111,9 @@ export default function AboutPage() {
                 external={item.external}
               >
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={titleStyle}>{item.title}</div>
+                  <div style={item.isCTA ? ctaTitleStyle : titleStyle}>
+                    {item.title}
+                  </div>
                   {item.caption && (
                     <div style={captionStyle}>{item.caption}</div>
                   )}
