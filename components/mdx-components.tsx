@@ -101,7 +101,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
           letterSpacing: "-0.03em",
           color: "#111",
           marginTop: "1.5rem",
-          marginBottom: "0.5rem",
+          marginBottom: "1rem",
           lineHeight: 1.4,
         }}
         {...props}

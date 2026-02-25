@@ -6,23 +6,15 @@ export const metadata = {
 
 ---
 
-My personal token represents the value I will create over the course of my life.
+My personal token represents the value I will create over my life.
 
-Its value is grounded in my profits when I sell equity in companies, personal tokens, and similar instruments. Holding shares in my token is a proportional claim to these gains. This is strictly an *economic* claim; it doesn't come with ownership / control / influence over me in any way.
+Its value is grounded in my profits when I sell equity in companies, other personal tokens, and similar instruments. 
+
+Holding shares in my token is a proportional claim to these gains. This is strictly an *economic* claim; it doesn't come with ownership / control / influence over me in any way.
 
 I'm creating my token so that I can incentivize people to help me create value at the level of life – beyond any single idea, and across everything I may ever do.
 
-I intend to create value primarily through equity in personal tokens. This is why bringing personal tokens to the world and creating value are deeply connected for me.
-
-## Representation
-
-At its core, my token is an *agreement* between me and my token shareholders, and the information and functionality required to honor that agreement.
-
-Every tangible thing about my personal token – its state, mechanics, agreement – exists on a blockchain, making every action visible and verifiable.
-
-You engage with my token through your onchain wallet. And since my token is an agreement with *you*, if you lose your onchain wallet or something else happens, we can reconcile the onchain state with the truth.
-
-Think of this website as a "client" for my onchain personal token. This is where you will authenticate yourself with your onchain wallet, buy and trade shares of my token, see its state, etc. You could do all of these actions through a different client if you wanted.
+I intend to create value primarily through equity in other personal tokens.
 
 ## Village
 
@@ -36,9 +28,25 @@ Since shares in my token are grounded in the value I will create over the course
 
 And since I need personal tokens to be adopted in order to create value, I plan to invite those who can help bring personal tokens to the world to my village to incentivize them with shares in my token.
 
-There are no obligations for villagers to help in a specific way. Some villagers may actively help me execute by implementing some functionality. Others may chime in with valuable feedback. Some may show up once a year to offer sage advice. And a few may never say anything at all, but their mere presence in the village signals their belief in this experiment, which unlocking doors.
+There are no obligations for villagers to help in a specific way. Some villagers may actively help me execute by implementing some functionality. Others may chime in with valuable feedback. Some may show up once a year to offer sage advice. And a few may never say anything at all, but their mere presence in the village signals their belief in this experiment, which unlocks doors.
 
-I view trading as invaluable feedback. How many shares a villager buys or sells, when, and at which price, signals feedback on my judgement with a degree of information that I simply don't have access to right now. Such feedback from the right village will help ground me in reality and enable me to create more value. This is why I intend to enable trading early, and also grow the village, to make liquidity smooth for villagers.
+I view trading as invaluable feedback. How many shares a villager buys or sells, when, and at which price, signals feedback on my judgement with a degree of information that I simply don't have access to right now. Such feedback from the right village will help ground me in reality and enable me to create more value. 
+
+This is why I intend to enable liquidity early, and grow the village, to enable villagers to express their feedback through trading.
+
+## Representation
+
+At its core, my personal token is an *agreement* between me and my shareholders, and the information and functionality required to honor that agreement.
+
+My personal token – its state, mechanics, agreement – exists on a blockchain ([Base](https://base.org)), making it visible and verifiable.
+
+On the blockchain, every shareholder is represented by a unique shareholder ID (a number - #1, #2, #3, etc.). When a shareholder joins, I generate a new ID for them, and associate their onchain address (like: alice.base.eth) with that ID. Every action a shareholder takes with my personal token onchain is tied to their shareholder ID.
+
+Other metadata about a shareholder (display name, legal name, etc.) is stored in a database offchain. Sensitive information such as legal name will remain private (I need it since we are entering into an agreement). Other metadata will be used to render shareholders on this site.
+
+Since my token is an agreement with *you*, if you lose access to your onchain address, I can map your shareholder ID to a new onchain address.
+
+Think of this website (homantoken.com) as a "client" for my onchain personal token. This is where you will authenticate yourself with your onchain wallet (the app that controls your onchain address), buy and trade shares of my token, see its state, etc. You could do all of these actions through a different client if you wanted.
 
 ## Mechanics
 
@@ -46,20 +54,25 @@ Key mechanics (defined as onchain functions):
 
 - **Floor** – the amount excluded from the scope of my token. I'm planning to set this to $10M, in a way that accounts for inflation. If you don't think I can create a lot more than $10M of value over my life, participating doesn't make sense.
 - **Buybacks** – I can buy back shares from shareholders at any time, but the minimum buyback price is determined by an onchain function, not by me in the moment.
-- **Royalties** – I get a small royalty in shares on the profit a shareholder makes when they sell. This enables me to dilute myself more.
+- **Royalties** – I get a small royalty in shares on the profit a shareholder makes when they sell.
 - **Voting** – shareholders vote on whether capital gains are distributed to shareholders or reinvested back into me to fuel more growth. Votes are weighted by shares held. I don't vote. Like companies, shareholders will mostly profit through secondary sales, not distributions.
 
 Any changes to my personal token (mechanics, the agreement, etc.) require every shareholder to approve. This is because any amendment is a change to what they agreed to when they came onboard.
 
 Every feature enables me to create more value, which benefits all of us.
 
-A floor enables me to dilute myself aggressively to bring onboard the right people. When I don't have to keep calculating "will I still be able to take care of my family if..." I can be a lot more generous in how I share equity in my token. Royalties further incentivizes me to grow.
+A floor enables me to dilute myself aggressively to grow. When I don't have to keep calculating "will I still be able to take care of my family if..." I can be a lot more generous in how I share equity in my token.
+
+Royalties incentivize me to grow. The more shareholders profit, the more equity in my own token I earn back, enabling me to dilute myself more aggressively upfront.
 
 Buybacks exist for alignment and evolution. The personal token is in its early days. There will be a lot of iteration moving forward (with your help!). We need to have the ability to buy out shareholders who stand in the way of progress that benefits all of us.
 
 The village must evolve over time. Like with startups, those who are valuable in one phase of the journey, may not be later on. I hope villagers can help me discover and convince the right people to join, and also help identify those we may need to part with. Our incentives are aligned. I expect that we will make these decisions together!
 
-[Read the whitepaper](https://github.com/homan9/personal-token/blob/main/whitepaper.md) for details.
+---
+
+[Read the whitepaper](https://github.com/homan9/personal-token/blob/main/whitepaper.md).<br/>
+[See the live village smart contract](https://basescan.org/address/0xA2C7d149fD50A277313F2349A558fdD59FCC6bCA).
 
 ## Trust
 
@@ -81,23 +94,25 @@ Right now I'm focused on building the right initial village that can help me shi
 
 I'm also raising a [preseed](/preseed) (open only to villagers).
 
-Then, I will launch my personal token with a seed round. I intend this to be a dutch auction to set the price. Trading will go live (within the village) immediately after this seed round.
+Then, I will launch my personal token with a seed round. I'm thinking this will be a [dutch auction](https://en.wikipedia.org/wiki/Dutch_auction) to set the initial price per share (at which the preseed converts). Trading will go live (within the village) immediately after this seed round.
 
 And we'll see where it goes from there!
 
 ## Help
 
-Clearly I need a lot of help to get this idea off the ground. I'd greatly appreciate feedback and intros to people who can help with this idea. And let me know if you want to launch your own token! I'd love to help in any way I can.
+Clearly I need a lot of help to get this idea off the ground.
 
- People who are helpful will be invited to the village and rewarded with higher caps (to give you more exposure to my upside).
- 
- Help out in the open! In the Discord server. On X threads. Wherever people can see it. This makes it easier for the village to find you and determine how much to reward you.
+I'd greatly appreciate feedback and intros to people who can help bring personal tokens to the world.
+
+I'd love to help others think through and launch their own tokens. Everything I'm building is open source. Feel free to fork. The more people work on their personal tokens, the more we learn together.
+
+People who are helpful will be invited to the village and rewarded with higher caps (more exposure to my upside). Help out in the open! In the Discord server. On X threads. Wherever people can see it. This makes it easier for the village to find you and reward you fairly.
  
  ## Disclosure
 
 My legal name is Karthik Uppuluri. I am a United States citizen. I'm 32 years old (05/18/1993). I have no outstanding legal obligations or debts. As of now, I have no holdings that fall within the scope of my personal token (equity in companies, etc.).
 
- I take good care of my health by modern standards. I had an incident of acute pancreatitis in 2016, but recovered in a few days and haven't had any major health incidents since. I intend to publish a more comprehensive health report leading up to the seed round.
+I take good care of my health. I had an incident of acute pancreatitis in 2016, but recovered in a few days and haven't had any major health incidents since. I intend to publish a more comprehensive health report leading up to the seed round.
  
  ---
 
@@ -105,8 +120,12 @@ My legal name is Karthik Uppuluri. I am a United States citizen. I'm 32 years ol
 
 ### Do I need to know "crypto" to participate?
 
-Not at all. In fact, I barely knew anything about this technology before I started working on this project. I'd love to help you understand how it works and get you set up. Also, I'm working on a really simple interface for all the mechanics of my token that (hopefully) makes the technology disappear into the background. You just need to learn a few basics.
+Not at all. In fact, I barely knew anything about this technology before I started working on this project.
+
+**Personal tokens are about connecting people**, not technology for the sake of it. 
+
+I'm working on a design for the interface to my personal token that makes the technology disappear into the background. You'll just need to learn a few basics. I'll be there to walk you through it!
 
 ### What determines a personal token's valuation?
 
-[On valuation](/valuation).
+> [On valuation](/valuation).
