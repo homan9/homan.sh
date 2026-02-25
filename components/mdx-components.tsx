@@ -39,7 +39,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         id={slugify(children)}
         className="mdx-h1"
         style={{
-          scrollMarginTop: "3rem",
+          scrollMarginTop: "5rem",
           fontSize,
           fontWeight: 580,
           letterSpacing: "-0.02em",
@@ -67,7 +67,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
         <h2
           id={slugify(children)}
           style={{
-            scrollMarginTop: "3rem",
+            scrollMarginTop: "5rem",
             fontSize,
             fontWeight: 540,
             letterSpacing: "-0.03em",
@@ -95,7 +95,7 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       <h3
         id={slugify(children)}
         style={{
-          scrollMarginTop: "3rem",
+          scrollMarginTop: "5rem",
           fontSize,
           fontWeight: 580,
           letterSpacing: "-0.03em",

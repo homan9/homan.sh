@@ -81,7 +81,7 @@ export default function Home() {
         />
 
         {/* Village Section */}
-        <Section>
+        <Section id="village">
           <SectionHeader
             title="Village"
             caption="a curated group who can buy shares of my token, and freely trade my shares amongst themselves."
@@ -92,7 +92,7 @@ export default function Home() {
         </Section>
 
         {/* Pending Invitations Section */}
-        <Section>
+        <Section id="invitations">
           <SectionHeader
             title="Pending invitations"
             caption="i'd be honored to have these people join the village."
