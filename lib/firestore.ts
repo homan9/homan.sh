@@ -1,4 +1,11 @@
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import type { Villager, Invitation } from "@/lib/types";
 
@@ -21,7 +28,11 @@ export async function getVillagerById(id: string): Promise<Villager | null> {
 }
 
 export async function getInvitations(): Promise<Invitation[]> {
-  const snapshot = await getDocs(collection(db, INVITATIONS_COLLECTION));
+  const q = query(
+    collection(db, INVITATIONS_COLLECTION),
+    orderBy("createdAt", "desc"),
+  );
+  const snapshot = await getDocs(q);
   return snapshot.docs
     .filter((d) => !d.data().isPaused)
     .map((d) => {

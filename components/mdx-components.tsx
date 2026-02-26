@@ -158,8 +158,8 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
               .footnotes > h2 { display: none; }
               .footnotes > .mdx-h2-wrapper { display: none !important; }
               .footnotes ol { padding-left: 1.25rem !important; list-style-type: decimal !important; margin-bottom: 0 !important; }
-              .footnotes li { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.4) !important; margin-bottom: 0.5rem !important; }
-              .footnotes li p { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.4) !important; margin-bottom: 0.25rem !important; }
+              .footnotes li { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.35) !important; margin-bottom: 0.5rem !important; }
+              .footnotes li p { font-size: 14px !important; font-weight: 480 !important; letter-spacing: -0.03em !important; line-height: 20px !important; color: rgba(17,17,17,0.35) !important; margin-bottom: 0.25rem !important; }
               a[id^="user-content-fnref"] { scroll-margin-top: 5rem; }
             `}</style>
             {children}
@@ -212,17 +212,20 @@ export function getMDXComponents(overrides: MDXComponents = {}): MDXComponents {
       </li>
     ),
     blockquote: ({ children, ...props }) => (
-      <blockquote
-        style={{
-          borderLeft: "2px solid rgba(17, 17, 17, 0.15)",
-          paddingLeft: "1rem",
-          margin: "1rem 0",
-          color: "rgba(17, 17, 17, 0.4)",
-        }}
-        {...props}
-      >
-        {children}
-      </blockquote>
+      <>
+        <style>{`blockquote p { color: rgba(17, 17, 17, 0.4) !important; }`}</style>
+        <blockquote
+          {...props}
+          style={{
+            borderLeft: "2px solid rgba(17, 17, 17, 0.07)",
+            paddingLeft: "1rem",
+            margin: "1rem 0",
+            color: "rgba(17, 17, 17, 0.4)",
+          }}
+        >
+          {children}
+        </blockquote>
+      </>
     ),
     hr: (props) => (
       <hr

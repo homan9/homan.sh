@@ -14,9 +14,6 @@ export default function Navbar() {
   const isHome = pathname === "/";
   const [showPic, setShowPic] = useState(!isHome);
 
-  const showIndex = !isHome && !isAboutPage;
-  const showCta = isHome;
-
   useEffect(() => {
     const target = document.getElementById("profile-pic");
     if (!target) {
@@ -37,6 +34,12 @@ export default function Navbar() {
     observer.observe(target);
     return () => observer.disconnect();
   }, [pathname]);
+
+  // On home: show "index" when profile pic is still visible in body,
+  // show CTA when it scrolls out (same timing as navbar profile pic).
+  // On other pages (except about): always show "index".
+  const showIndex = isHome ? !showPic : !isAboutPage;
+  const showCta = isHome && showPic;
 
   return (
     <nav
@@ -89,24 +92,39 @@ export default function Navbar() {
             display: "flex",
             alignItems: "center",
             gap: "12px",
+            position: "relative",
           }}
         >
-          {showIndex && (
+          {/* Index link — visible on home before scroll, or on non-home/non-about pages */}
+          <Link
+            href="/about"
+            style={{
+              fontSize: "0.9rem",
+              fontWeight: 540,
+              textDecoration: "none",
+              letterSpacing: "-0.02em",
+              opacity: showIndex ? 1 : 0,
+              pointerEvents: showIndex ? "auto" : "none",
+              transition: "opacity 0.2s ease",
+              position: isHome ? "absolute" : "relative",
+              right: 0,
+            }}
+            className="nav-link"
+          >
+            index
+          </Link>
+
+          {/* CTA — only on home, fades in/out with profile pic */}
+          {isHome && (
             <Link
-              href="/about"
+              href="/how"
+              className="nav-cta"
               style={{
-                fontSize: "0.9rem",
-                fontWeight: 540,
-                textDecoration: "none",
-                letterSpacing: "-0.02em",
+                opacity: showCta ? 1 : 0,
+                pointerEvents: showCta ? "auto" : "none",
+                transition: "opacity 0.2s ease",
               }}
-              className="nav-link"
             >
-              index
-            </Link>
-          )}
-          {showCta && (
-            <Link href="/how" className="nav-cta">
               how it works
             </Link>
           )}

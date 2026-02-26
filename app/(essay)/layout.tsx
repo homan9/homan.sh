@@ -1,5 +1,6 @@
 import React from "react";
 import TableOfContents from "@/components/ui/table-of-contents";
+import ScrollToTop from "@/components/scroll-to-top";
 
 export default function EssayLayout({
   children,
@@ -15,6 +16,7 @@ export default function EssayLayout({
         background: "#fff",
       }}
     >
+      <ScrollToTop />
       <TableOfContents />
       <div
         className="page-container"
