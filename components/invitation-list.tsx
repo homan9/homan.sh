@@ -9,7 +9,11 @@ export default async function InvitationList() {
   return (
     <List>
       {invitations.map((invitation) => (
-        <BaseListItem key={invitation.id} href={`/invitation/${invitation.id}`}>
+        <BaseListItem
+          key={invitation.id}
+          href={invitation.postLink ?? `/invitation/${invitation.id}`}
+          external={!!invitation.postLink}
+        >
           <AvatarName
             src={invitation.profilePicSrc}
             name={invitation.displayName}
