@@ -80,7 +80,7 @@ const items: AboutItem[] = [
     external: true,
   },
   {
-    title: "What is a personal token worth?",
+    title: "What is a person worth?",
     href: "/valuation",
   },
   {

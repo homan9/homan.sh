@@ -4,9 +4,6 @@
     --color-link: #0084ff;
     --color-link-hover: #0066cc;
     --background: #ffffff;
-    --invitation-caption-size: 24px;
-    --invitation-georgia-size: 25px;
-
     /* ——— Design system: dashed border ——— */
     --dashed-border-color: rgba(17, 17, 17, 0.06);
     --dashed-border-width: 1px;
@@ -75,10 +72,6 @@ blockquote p {
 @media (max-width: 640px) {
     .mdx-h1 {
         font-size: 1.5rem;
-    }
-    :root {
-        --invitation-caption-size: 20px;
-        --invitation-georgia-size: 21px;
     }
 }
 

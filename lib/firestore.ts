@@ -1,16 +1,8 @@
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  orderBy,
-} from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import type { Villager, Invitation } from "@/lib/types";
+import type { Villager } from "@/lib/types";
 
 const VILLAGERS_COLLECTION = "villagers";
-const INVITATIONS_COLLECTION = "invitations";
 
 export async function getVillagers(): Promise<Villager[]> {
   const snapshot = await getDocs(collection(db, VILLAGERS_COLLECTION));
@@ -24,28 +16,5 @@ export async function getVillagerById(id: string): Promise<Villager | null> {
   const snap = await getDoc(doc(db, VILLAGERS_COLLECTION, id));
   if (!snap.exists()) return null;
   const data = snap.data() as Omit<Villager, "id">;
-  return { id: snap.id, ...data };
-}
-
-export async function getInvitations(): Promise<Invitation[]> {
-  const q = query(
-    collection(db, INVITATIONS_COLLECTION),
-    orderBy("createdAt", "desc"),
-  );
-  const snapshot = await getDocs(q);
-  return snapshot.docs
-    .filter((d) => !d.data().isPaused)
-    .map((d) => {
-      const data = d.data() as Omit<Invitation, "id">;
-      return { id: d.id, ...data };
-    });
-}
-
-export async function getInvitationBySlug(
-  slug: string,
-): Promise<Invitation | null> {
-  const snap = await getDoc(doc(db, INVITATIONS_COLLECTION, slug));
-  if (!snap.exists()) return null;
-  const data = snap.data() as Omit<Invitation, "id">;
   return { id: snap.id, ...data };
 }

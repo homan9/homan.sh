@@ -8,16 +8,6 @@ export type Villager = {
   videoID: string;
 };
 
-export type Invitation = {
-  id: string;
-  firstName: string;
-  displayName: string;
-  profilePicSrc: string;
-  videoID: string;
-  isPaused?: boolean;
-  postLink?: string;
-};
-
 export type TokenOwner = {
   name: string;
   legalName: string;

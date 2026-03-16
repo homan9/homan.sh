@@ -65,8 +65,12 @@ function BioLinks() {
         whitepaper
       </a>
       <span style={{ color: "rgba(17, 17, 17, 0.25)" }}>|</span>
-      <a href="#" target="_blank" rel="noopener noreferrer">
-        post
+      <a
+        href="https://x.com/heyhoman"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        X
       </a>
     </div>
   );
