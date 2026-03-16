@@ -10,6 +10,7 @@ function Bio({ children }: { children: React.ReactNode }) {
         color: "rgba(17, 17, 17, 1.0)",
         letterSpacing: "-0.02em",
         lineHeight: "22px",
+        margin: 0,
       }}
     >
       <style>{`
@@ -25,6 +26,49 @@ function Bio({ children }: { children: React.ReactNode }) {
       `}</style>
       {children}
     </p>
+  );
+}
+
+function BioLinks() {
+  return (
+    <div
+      className="bio"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.5rem",
+        marginTop: 2,
+        fontSize: "1rem",
+        fontWeight: 460,
+        letterSpacing: "-0.02em",
+        lineHeight: "22px",
+      }}
+    >
+      <style>{`
+        .bio a {
+          color: var(--color-link);
+          text-decoration: none;
+          transition: color 0.15s ease;
+          font-weight: 500;
+        }
+        .bio a:hover {
+          color: var(--color-link-hover);
+        }
+      `}</style>
+      <a href="/how">how it works</a>
+      <span style={{ color: "rgba(17, 17, 17, 0.25)" }}>|</span>
+      <a
+        href="https://github.com/homan9/personal-token/blob/main/whitepaper.md"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        whitepaper
+      </a>
+      <span style={{ color: "rgba(17, 17, 17, 0.25)" }}>|</span>
+      <a href="#" target="_blank" rel="noopener noreferrer">
+        post
+      </a>
+    </div>
   );
 }
 
@@ -48,9 +92,8 @@ export default function ProfileHeader() {
           gap: 6,
         }}
       >
-        <Bio>
-          welcome to my personal token! <a href="/how">Here's how it works</a>.
-        </Bio>
+        <Bio>building a world in which we can hold shares in people.</Bio>
+        <BioLinks />
       </div>
     </div>
   );

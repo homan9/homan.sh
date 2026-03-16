@@ -5,12 +5,11 @@ import ProfileHeader from "@/components/profile-header";
 import Section from "@/components/ui/section";
 import SectionHeader from "@/components/ui/section-header";
 import VillagerList from "@/components/villager-list";
-import InvitationList from "@/components/invitation-list";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "homan's token",
+  title: "homan",
 };
 
 function ListPlaceholder({ rows = 3 }: { rows?: number }) {
@@ -75,30 +74,19 @@ export default function Home() {
 
         {/* Hero Video */}
         <MuxVideo
-          playbackId="V4EyWaRR6iTK97HBNNoMtArCQwjGMbvy7sXygtoQwdI"
+          playbackId="sRSav025sTwnTudTDIV4H005vB8edzrJ6YslyHFWbfehY"
           title="homan"
-          thumbnailTime={2}
+          thumbnailTime={0}
         />
 
         {/* Village Section */}
         <Section id="village">
           <SectionHeader
             title="Village"
-            caption="a curated group who can buy shares of my token, and freely trade my shares amongst themselves."
+            caption="a curated group who can buy and trade shares of me amongst themselves."
           />
           <Suspense fallback={<ListPlaceholder rows={4} />}>
             <VillagerList />
-          </Suspense>
-        </Section>
-
-        {/* Pending Invitations Section */}
-        <Section id="invitations">
-          <SectionHeader
-            title="Pending invitations"
-            caption="would love to have these people join the village."
-          />
-          <Suspense fallback={<ListPlaceholder rows={5} />}>
-            <InvitationList />
           </Suspense>
         </Section>
       </div>
