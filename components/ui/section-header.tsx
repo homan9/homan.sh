@@ -3,16 +3,21 @@ import React from "react";
 type SectionHeaderProps = {
   title: string;
   caption?: string;
+  titleColor?: string;
 };
 
-export default function SectionHeader({ title, caption }: SectionHeaderProps) {
+export default function SectionHeader({
+  title,
+  caption,
+  titleColor = "#111",
+}: SectionHeaderProps) {
   return (
     <div style={{ marginBottom: 16, padding: "0 24px" }}>
       <h2
         style={{
           fontSize: 16,
           fontWeight: 500,
-          color: "#111",
+          color: titleColor,
           letterSpacing: "-0.03em",
           lineHeight: 1.4,
           margin: 0,

@@ -1,8 +1,9 @@
 import AvatarName from "@/components/ui/avatar-name";
+import BioContent from "@/content/bio.mdx";
 
 function Bio({ children }: { children: React.ReactNode }) {
   return (
-    <p
+    <div
       className="bio"
       style={{
         fontSize: "1rem",
@@ -14,6 +15,14 @@ function Bio({ children }: { children: React.ReactNode }) {
       }}
     >
       <style>{`
+        .bio p {
+          font-size: 1rem !important;
+          line-height: 21px !important;
+          margin-bottom: 1rem !important;
+        }
+        .bio p:last-child {
+          margin-bottom: 0 !important;
+        }
         .bio a {
           color: var(--color-link);
           text-decoration: none;
@@ -25,7 +34,7 @@ function Bio({ children }: { children: React.ReactNode }) {
         }
       `}</style>
       {children}
-    </p>
+    </div>
   );
 }
 
@@ -37,7 +46,7 @@ function BioLinks() {
         display: "flex",
         alignItems: "center",
         gap: "0.5rem",
-        marginTop: 2,
+        marginTop: 8,
         fontSize: "1rem",
         fontWeight: 460,
         letterSpacing: "-0.02em",
@@ -96,7 +105,9 @@ export default function ProfileHeader() {
           gap: 6,
         }}
       >
-        <Bio>building a world in which we can hold shares in people.</Bio>
+        <Bio>
+          <BioContent />
+        </Bio>
         <BioLinks />
       </div>
     </div>

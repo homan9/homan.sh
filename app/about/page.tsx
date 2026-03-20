@@ -2,6 +2,8 @@ import PersonalTokenScene from "@/visualizations/personal-token/PersonalTokenSce
 import List from "@/components/ui/list";
 import BaseListItem from "@/components/ui/list-item";
 import ExternalArrow from "@/components/ui/external-arrow";
+import Section from "@/components/ui/section";
+import SectionHeader from "@/components/ui/section-header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -68,7 +70,7 @@ const socialLinkStyle: React.CSSProperties = {
   alignItems: "center",
 };
 
-const items: AboutItem[] = [
+const topItems: AboutItem[] = [
   {
     title: "How it works",
     href: "/how",
@@ -83,6 +85,9 @@ const items: AboutItem[] = [
     title: "What is a person worth?",
     href: "/valuation",
   },
+];
+
+const villagerItems: AboutItem[] = [
   {
     title: "Create your villager account",
     href: "/create-account",
@@ -91,6 +96,9 @@ const items: AboutItem[] = [
     title: "Welcome to the village!",
     href: "/welcome",
   },
+];
+
+const sourceItems: AboutItem[] = [
   {
     title: "Village smart contract",
     href: "https://basescan.org/address/0xA2C7d149fD50A277313F2349A558fdD59FCC6bCA",
@@ -121,14 +129,26 @@ const ctaTitleStyle: React.CSSProperties = {
   color: "var(--color-link)",
 };
 
-const captionStyle: React.CSSProperties = {
-  fontSize: 14,
-  fontWeight: 500,
-  color: "rgba(17, 17, 17, 0.4)",
-  letterSpacing: "-0.01em",
-  lineHeight: 1.4,
-  marginTop: 1,
-};
+function ItemList({ items }: { items: AboutItem[] }) {
+  return (
+    <List>
+      {items.map((item) => (
+        <BaseListItem
+          key={item.title}
+          href={item.href}
+          external={item.external}
+        >
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={item.isCTA ? ctaTitleStyle : titleStyle}>
+              {item.title}
+            </div>
+          </div>
+          {item.external && <ExternalArrow />}
+        </BaseListItem>
+      ))}
+    </List>
+  );
+}
 
 export default function AboutPage() {
   return (
@@ -146,34 +166,32 @@ export default function AboutPage() {
         style={{
           width: "100%",
           maxWidth: 500,
+          paddingBottom: 64,
         }}
       >
-        {/* Visualization — padded, dashed bottom border */}
+        {/* Visualization */}
         <div className="section" style={{ padding: 24, borderTopWidth: 0 }}>
           <PersonalTokenScene fill />
         </div>
 
-        {/* Links list */}
-        <div style={{ paddingBottom: 64 }}>
+        {/* Top links — no section header */}
+        <ItemList items={topItems} />
+
+        {/* Villagers */}
+        <Section id="villagers">
+          <SectionHeader title="Villagers" titleColor="rgba(17, 17, 17, 0.3)" />
+          <ItemList items={villagerItems} />
+        </Section>
+
+        {/* Source */}
+        <Section id="source">
+          <SectionHeader title="Source" titleColor="rgba(17, 17, 17, 0.3)" />
+          <ItemList items={sourceItems} />
+        </Section>
+
+        {/* Social row */}
+        <Section id="social" style={{ paddingTop: 32 }}>
           <List>
-            {items.map((item) => (
-              <BaseListItem
-                key={item.title}
-                href={item.href}
-                external={item.external}
-              >
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={item.isCTA ? ctaTitleStyle : titleStyle}>
-                    {item.title}
-                  </div>
-                  {item.caption && (
-                    <div style={captionStyle}>{item.caption}</div>
-                  )}
-                </div>
-                {item.external && <ExternalArrow />}
-              </BaseListItem>
-            ))}
-            {/* Social row */}
             <BaseListItem passive>
               <div style={{ display: "flex", gap: 16 }}>
                 <a
@@ -197,7 +215,7 @@ export default function AboutPage() {
               </div>
             </BaseListItem>
           </List>
-        </div>
+        </Section>
       </div>
     </div>
   );

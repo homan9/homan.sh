@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import MuxVideo from "@/components/mux-video";
+// import MuxVideo from "@/components/mux-video";
 import ProfileHeader from "@/components/profile-header";
 import Section from "@/components/ui/section";
 import SectionHeader from "@/components/ui/section-header";
@@ -56,7 +56,6 @@ export default function Home() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        minHeight: "100vh",
         background: "#fff",
       }}
     >
@@ -73,11 +72,11 @@ export default function Home() {
         <ProfileHeader />
 
         {/* Hero Video */}
-        <MuxVideo
+        {/* <MuxVideo
           playbackId="sRSav025sTwnTudTDIV4H005vB8edzrJ6YslyHFWbfehY"
           title="homan"
           thumbnailTime={0}
-        />
+        /> */}
 
         {/* Village Section */}
         <Section id="village">
